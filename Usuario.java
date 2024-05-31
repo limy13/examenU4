@@ -100,7 +100,7 @@ public class Usuario {
         String caracter = rol == Rol.ALUMNO ? "l" : rol == Rol.PROFESOR ? "M" : "C";
         String siglasCarrera = Sistema.carrera == Carreras.ISC ? "ISC" : Sistema.carrera == Carreras.IMAT ? "IMAT" : "ELC";
 
-        numeroControl += caracter + letraNombre + "24" + siglasCarrera;
+        numeroControl = numeroControl + caracter + letraNombre + "24" + siglasCarrera;
 
         for(Usuario usuario : Sistema.usuarios.get(Sistema.carrera).get(rol)) {
             String [] numeroPartes = usuario.getNumeroControl().split("-");

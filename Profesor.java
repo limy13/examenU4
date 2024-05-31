@@ -35,67 +35,6 @@ public class Profesor extends Usuario {
         double sueldo = scanner.nextDouble();
         Carreras carrera = Sistema.carrera;
         ArrayList<String> materiasImparte = new ArrayList<>();
-        int x = 1;
-        for(String materia : Sistema.materias.get(carrera)) {
-            System.out.println("\n---- Materias disponibles ----");
-            System.out.println(x + ". " + materia);
-            x++;
-        }
-        System.out.println("\nElija las materias que imparte: ");
-        int decision = scanner.nextInt(); //try aqui
-        String materia = Sistema.materias.get(carrera)[decision - 1];
-
-        for(String i : materiasImparte) {
-            if(i.equals(materia)) {
-                System.out.println("\nUsted ya imparte esta clase");
-            }
-            else {
-                switch(decision) {
-
-                    case 1:
-                        materiasImparte.add(Sistema.materias.get(carrera)[0]);
-                        break;
-
-                    case 2:
-                        materiasImparte.add(Sistema.materias.get(carrera)[1]);
-                        break;
-
-                    case 3:
-                        materiasImparte.add(Sistema.materias.get(carrera)[2]);
-                        break;
-
-                    case 4:
-                        materiasImparte.add(Sistema.materias.get(carrera)[3]);
-                        break;
-
-                    case 5:
-                        materiasImparte.add(Sistema.materias.get(carrera)[4]);
-                        break;
-
-                    case 6:
-                        materiasImparte.add(Sistema.materias.get(carrera)[5]);
-                        break;
-
-                    case 7:
-                        materiasImparte.add(Sistema.materias.get(carrera)[6]);
-                        break;
-
-                    case 8:
-                        materiasImparte.add(Sistema.materias.get(carrera)[7]);
-                        break;
-
-                    case 9:
-                        materiasImparte.add(Sistema.materias.get(carrera)[8]);
-                        break;
-                }
-            }
-        }
-
-
-
-
 
     }
-
-
 }
