@@ -189,4 +189,89 @@ public class Usuario {
         }
         return "X";
     }
+
+
+    public static String validarFecha() {
+        Scanner scanner = new Scanner(System.in);
+        boolean fechaValida = false;
+        String fechaIngresada = "";
+
+        while (!fechaValida) {
+            System.out.print("Ingresa una fecha con formato yyyy-MM-dd:");
+            fechaIngresada = scanner.nextLine();
+
+            String[] partesFecha = fechaIngresada.split("-");
+            int año = Integer.parseInt(partesFecha[0]);
+            int mes = Integer.parseInt(partesFecha[1]);
+            int dia = Integer.parseInt(partesFecha[2]);
+
+
+            // si ano es == a el actual hacer esto
+            if (año == LocalDate.now().getYear()){
+                if (mes >= 1 && mes <= 12 && mes <= LocalDate.now().getMonthValue() ) {
+                    // Validar el día
+                    if (dia >= 1 && dia <= obtenerDiasEnMes(mes)) {
+                        fechaValida = true;
+                    } else {
+                        System.out.println("\nError: El día ingresado no corresponde al mes especificado.");
+                    }
+                } else {
+                    System.out.println("\nError: El mes ingresado no es válido.");
+                }
+
+            }
+
+
+
+
+
+
+            // Verificar que el año no sea futuro pero tampoco presente
+            if (año < LocalDate.now().getYear() && año > 1907 ) {
+                // Validar el mes
+
+                if (mes >= 1 && mes <= 12  ) {
+                    // Validar el día
+                    if (dia >= 1 && dia <= obtenerDiasEnMes(mes)) {
+                        fechaValida = true;
+                    } else {
+                        System.out.println("\nError: El día ingresado no corresponde al mes especificado.");
+                    }
+                } else {
+                    System.out.println("\nError: El mes ingresado no es válido.");
+                }
+            } else {
+                System.out.println("\nError: El año ingresado no puede ser un año futuro o muy muy viejo.");
+            }//fin if
+        }//while
+
+        return fechaIngresada;
+    }//metodovalidar
+
+
+    public static int obtenerDiasEnMes(int mes) {
+        switch (mes) {
+            case 2:
+                return 28;
+
+            case 4:
+                return 30; // Abril, junio, septiembre y noviembre tienen 30 días
+
+            case 6:
+                return 30;
+
+            case 9:
+                return 30;
+
+            case 11:
+                return 30;
+
+
+            default:
+                return 31; // Los demás meses tienen 31 días
+        }
+    }
+
+
+
 }

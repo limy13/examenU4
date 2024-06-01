@@ -4,6 +4,7 @@ public class Grupo {
     public int getNumeroAlumnos() {
         return alumnos.length;
     }
+
     void anadirAlumno(){
         if (alumnos.length < 3){
             for (int i = 0; i < 3; i++){

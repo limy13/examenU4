@@ -7,7 +7,7 @@ public class Sistema {
 
     public static final Map<Carreras, Map<Rol, ArrayList<Usuario>>> usuarios = new HashMap<>();
     public static Carreras carrera; //accede a la carrera de la persona que inicia sesion
-    public static Map<Carreras, String []> materias  = new HashMap<>();
+    public static final Map<Carreras, Map<Integer, String[]>> materiasPorCarreraYSemestre = new HashMap<>();
 
     public Sistema() {
         usuarios.put(Carreras.ISC, new HashMap<>());
@@ -43,6 +43,28 @@ public class Sistema {
             }
         }
         return null;
+    }
+
+    static {
+        // Inicializar materias para cada carrera y semestre
+        materiasPorCarreraYSemestre.put(Carreras.ISC, new HashMap<>());
+        materiasPorCarreraYSemestre.get(Carreras.ISC).put(1, new String[] {"Programación 1", "Probabilidad 1", "Cálculo 1"});
+        materiasPorCarreraYSemestre.get(Carreras.ISC).put(2, new String[] {"Programación 2", "Probabilidad 2", "Cálculo 2"});
+        materiasPorCarreraYSemestre.get(Carreras.ISC).put(3, new String[] {"Programación 3", "Probabilidad 3", "Cálculo 3"});
+
+        materiasPorCarreraYSemestre.put(Carreras.IMAT, new HashMap<>());
+        materiasPorCarreraYSemestre.get(Carreras.IMAT).put(1, new String[] {"Estadística 1", "Contabilidad 1", "Cálculo 1"});
+        materiasPorCarreraYSemestre.get(Carreras.IMAT).put(2, new String[] {"Estadística 2", "Contabilidad 2", "Cálculo 2"});
+        materiasPorCarreraYSemestre.get(Carreras.IMAT).put(3, new String[] {"Estadística 3", "Contabilidad 3", "Cálculo 3"});
+
+        materiasPorCarreraYSemestre.put(Carreras.ELC, new HashMap<>());
+        materiasPorCarreraYSemestre.get(Carreras.ELC).put(1, new String[] {"Redes 1", "Circuitos 1", "Cálculo 1"});
+        materiasPorCarreraYSemestre.get(Carreras.ELC).put(2, new String[] {"Redes 2", "Circuitos 2", "Cálculo 2"});
+        materiasPorCarreraYSemestre.get(Carreras.ELC).put(3, new String[] {"Redes 3", "Circuitos 3", "Cálculo 3"});
+    }
+
+    public static String[] obtenerMaterias(Carreras carrera, int semestre) {
+        return materiasPorCarreraYSemestre.get(carrera).get(semestre);
     }
 
 }
