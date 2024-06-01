@@ -1,24 +1,24 @@
+import java.util.ArrayList;
+
 public class Semestre {
     int numeroDeSemestre;
-    Grupo[] grupos = new Grupo[2];
+    ArrayList<Grupo> grupos = new ArrayList<>();
     Grupo grupoA = new Grupo();
     Grupo grupoB = new Grupo();
     int contadorGrupos = 1;
     Semestre(int numeroDeSemestre){
         this.numeroDeSemestre = numeroDeSemestre;
-        grupos[0] = grupoA;
+        grupos.add(grupoA);
     }
 
     public void anadirGrupoB(){
-        grupos[1] = grupoB;
+        grupos.add(grupoB);
         contadorGrupos++;
     }
 
     boolean estaLlenoElGrupo(int indiceDeGrupo){
         boolean estanLlenos = false;
-        if (grupos[0].getNumeroAlumnos() < 20){
-            estanLlenos = false;
-        }else if(grupos[0].getNumeroAlumnos() == 20){
+        if(grupos.get(indiceDeGrupo).getNumeroAlumnos() == 20){
             estanLlenos = true;
         }
         return estanLlenos;
@@ -28,7 +28,7 @@ public class Semestre {
         if (!estaLlenoElGrupo(0)){
             grupoA.anadirAlumno();
         }
-        else if(estaLlenoElGrupo(0) && grupos.length == 1){
+        else if(estaLlenoElGrupo(0) && grupos.size() == 1){
             anadirGrupoB();
             grupoB.anadirAlumno();
         }

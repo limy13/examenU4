@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
 public class Carrera {
-    Semestre[] semestres = new Semestre[3];
+    ArrayList<Semestre> semestres;
     Semestre semestre1 = new Semestre(1);
     Semestre semestre2 = new Semestre(2);
     Semestre semestre3 = new Semestre(3);
     ArrayList<Alumno> graduados = new ArrayList<Alumno>();
 
     Carrera(){
-        semestres[0] = semestre1;
+        semestres.add(semestre1);
     }
     void procesoDeInicioDeSemestre(){
 

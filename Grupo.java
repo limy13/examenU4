@@ -1,27 +1,21 @@
+import java.util.ArrayList;
+
 public class Grupo {
-    private Alumno[] alumnos = new Alumno[20];
+    private ArrayList<Alumno> alumnos = new ArrayList<>();
 
     public int getNumeroAlumnos() {
-        return alumnos.length;
+        return alumnos.size();
     }
-
     void anadirAlumno(){
-        if (alumnos.length < 3){
+        if (alumnos.size() < 3){
             for (int i = 0; i < 3; i++){
                 //se registran alumnos pero ps todavia no existe el metodo para registrar alumnos
                 //esto es forzado btw, tiene que agregar si o si 3 alumnos si es que no existe ninguno
-                alumnos[i] = new Alumno();
+                alumnos.add(new Alumno());
             }
-        }
-        if (alumnos.length > 3 && alumnos.length < 20){
-            for (int i = 0; i < alumnos.length; i++){
-                if (alumnos[i] == null){
-                    alumnos[i] = new Alumno();
-                }
-            }
+        }else if (alumnos.size() < 20){
+            alumnos.add(new Alumno());
         }
         //se registra a un alumno con metodo que los alumnos ya tendran
-        Alumno a = new Alumno();
-        alumnos[getNumeroAlumnos()-1] = a;
     }
 }
