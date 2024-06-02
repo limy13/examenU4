@@ -2,10 +2,14 @@ import java.util.ArrayList;
 
 public class Alumno extends Usuario{
     private ArrayList<Materia> materias;
+    private int semestre;
+    private double promedio;
+    private String grupo; //esto puede cambiarse
 
-    public Alumno(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, int anoNacimiento, Carreras carrera, int semestre) {
-        super(nombre, apellido, ciudad, estado, curp, direccion, numeroControl, anoNacimiento, carrera, Rol.ALUMNO);
+    public Alumno(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacimiento, Carreras carrera, int semestre) {
+        super(nombre, apellido, ciudad, estado, curp, direccion, numeroControl, fechaNacimiento, carrera, Rol.ALUMNO);
         this.materias = new ArrayList<>();
+        this.semestre = semestre;
         asignarMaterias(carrera, semestre);
     }
 
@@ -18,5 +22,13 @@ public class Alumno extends Usuario{
 
     public ArrayList<Materia> getMaterias() {
         return materias;
+    }
+
+    @Override
+    public void verInformacionPersonal() {
+        super.verInformacionPersonal();
+        System.out.println("Semestre: " + this.semestre);
+        System.out.println("Grupo: " + this.grupo);
+        System.out.println("Promedio: " + this.promedio);
     }
 }

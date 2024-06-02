@@ -2,12 +2,11 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Usuario {
-    private String nombre, apellido, ciudad, estado, curp, fechaRegistro, direccion, grupo, numeroControl, nombreUsuario, contrasena;
-    private int anoNacimiento;
+    private String nombre, apellido, ciudad, estado, curp, fechaRegistro, direccion, grupo, numeroControl, nombreUsuario, contrasena, fechaNacimiento;
     private Carreras carrera;
     private Rol rol;
 
-    public Usuario(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, int anoNacimiento, Carreras carrera, Rol rol) {
+    public Usuario(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacimiento, Carreras carrera, Rol rol) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.ciudad = ciudad;
@@ -16,7 +15,7 @@ public class Usuario {
         this.fechaRegistro = String.valueOf(LocalDate.now());
         this.direccion = direccion;
         this.numeroControl = numeroControl;
-        this.anoNacimiento = anoNacimiento;
+        this.fechaNacimiento = fechaNacimiento;
         this.carrera = carrera;
         this.rol = rol;
     }
@@ -112,7 +111,7 @@ public class Usuario {
             String [] numeroPartes = usuario.getNumeroControl().split("-");
             if(numeroPartes[0].equals(numeroControl)) {
                 int numero = Integer.parseInt(numeroPartes[1]) + 1;
-                numeroControl += String.valueOf(numero);
+                numeroControl = numeroControl + numero;
                 break;
             }
         }
@@ -278,6 +277,18 @@ public class Usuario {
         }
     }
 
+    public void verInformacionPersonal() {
+        System.out.println("---- Información Personal ----");
+        System.out.println("Nombre completo: " + this.nombre + " " + this.apellido);
+        System.out.println("Fecha de nacimiento: " + this.fechaNacimiento);
+        System.out.println("Ciudad: " + this.ciudad);
+        System.out.println("Estado: " + this.estado);
+        System.out.println("CURP: " + this.curp);
+        System.out.println("Dirección: " + this.direccion);
+        System.out.println("Fecha de registro: " + this.fechaRegistro);
+        System.out.println("Número de control: " + this.numeroControl);
+        System.out.println("Carrera: " + this.carrera);
+    }
 
 
 }
