@@ -4,7 +4,7 @@ public class Alumno extends Usuario{
     private ArrayList<Materia> materias;
 
     public Alumno(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, int anoNacimiento, Carreras carrera, int semestre) {
-        super(nombre, apellido, ciudad, estado, curp, direccion, numeroControl, anoNacimiento, carrera);
+        super(nombre, apellido, ciudad, estado, curp, direccion, numeroControl, anoNacimiento, carrera, Rol.ALUMNO);
         this.materias = new ArrayList<>();
         asignarMaterias(carrera, semestre);
     }

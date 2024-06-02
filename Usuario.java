@@ -5,8 +5,9 @@ public class Usuario {
     private String nombre, apellido, ciudad, estado, curp, fechaRegistro, direccion, grupo, numeroControl, nombreUsuario, contrasena;
     private int anoNacimiento;
     private Carreras carrera;
+    private Rol rol;
 
-    public Usuario(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, int anoNacimiento, Carreras carrera) {
+    public Usuario(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, int anoNacimiento, Carreras carrera, Rol rol) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.ciudad = ciudad;
@@ -17,6 +18,7 @@ public class Usuario {
         this.numeroControl = numeroControl;
         this.anoNacimiento = anoNacimiento;
         this.carrera = carrera;
+        this.rol = rol;
     }
 
     public String getNombreUsuario() {
@@ -33,6 +35,10 @@ public class Usuario {
 
     public String getNumeroControl() {
         return numeroControl;
+    }
+
+    public Rol getRol() {
+        return rol;
     }
 
     public static ArrayList datosComun(Rol rol) {

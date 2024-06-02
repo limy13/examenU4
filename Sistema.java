@@ -10,6 +10,11 @@ public class Sistema {
     public static final Map<Carreras, Map<Integer, String[]>> materiasPorCarreraYSemestre = new HashMap<>();
 
     public Sistema() {
+
+        Coordinador coordinadorIsc = new Coordinador("Jose", "Herrera Garcia", "Morelia", "MN", "HFGNRUGGFRJ", "JULI", "CJ24ISC-0", 1998, Carreras.ISC, 20000, new String ["Programación 1"], "JGJTTNGGTGT");
+        Coordinador coordinadorImat = new Coordinador();
+        Coordinador coordinadorElc = new Coordinador();
+
         usuarios.put(Carreras.ISC, new HashMap<>());
         usuarios.get(Carreras.ISC).put(Rol.ALUMNO, new ArrayList<>());
         usuarios.get(Carreras.ISC).put(Rol.PROFESOR, new ArrayList<>());
