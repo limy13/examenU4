@@ -1,6 +1,27 @@
 import java.util.ArrayList;
 
 public class Carrera {
+
+    private int id;
+    private String nombreCarrera;
+    private int cantidadGrupos;
+    private int cantidadAlumnos;
+    private int cantidadMaterias;
+    private String fechaCreacion;
+    private String coordinador;
+    private String abreviacion;
+
+    public Carrera(int id, String nombreCarrera, int cantidadGrupos, int cantidadAlumnos, int cantidadMaterias, String fechaCreacion, String coordinador, String abreviacion) {
+        this.id = id;
+        this.nombreCarrera = nombreCarrera;
+        this.cantidadGrupos = cantidadGrupos;
+        this.cantidadAlumnos = cantidadAlumnos;
+        this.cantidadMaterias = cantidadMaterias;
+        this.fechaCreacion = fechaCreacion;
+        this.coordinador = coordinador;
+        this.abreviacion = abreviacion;
+    }
+
     ArrayList<Semestre> semestres;
     Semestre semestre1 = new Semestre(1);
     Semestre semestre2 = new Semestre(2);
