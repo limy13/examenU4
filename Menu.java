@@ -21,37 +21,33 @@ public class Menu {
                 if(usuarioActual != null) {
                     UsuarioEnSesion.obtenerInstancia().setUsuarioActual(usuarioActual);
                     seleccionarMenu();
-                }
-                else {
+                } else {
                     System.out.println("\nUsuario o contraseña incorrectos.");
                     do {
                         try {
-                            System.out.print("\n¿Desea intentarlo otra vez? (1 = si, 2 = no)");
+                            System.out.print("\n¿Desea intentarlo otra vez? (1. Si, 2. Cerrar Programa)");
                             int decision = scanner.nextInt();
+                            scanner.nextLine();
                             if(decision == 2) {
                                 datosCorrectos = false;
                                 salir = true;
-                            }
-                            else if (decision == 1){
+                            } else if (decision == 1){
                                 datosCorrectos = true;
                                 salir = true;
-                            }
-                            else {
+                            } else {
                                 System.out.println("\nPor favor ingrese una de las opciones disponibles");
                             }
-                        }
-                        catch (Exception e) {
+                        } catch (Exception e) {
                             System.out.println("\nPor favor ingrese una de las opciones disponibles");
+                            scanner.nextLine();
                         }
-                    }
-                    while(!salir);
+                    } while(!salir);
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("\nPor favor ingrese una cadena");
+                scanner.nextLine();
             }
-        }
-        while(datosCorrectos);
+        } while(datosCorrectos);
     }
 
     private void seleccionarMenu() {

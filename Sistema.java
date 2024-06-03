@@ -72,4 +72,12 @@ public class Sistema {
         return materiasPorCarreraYSemestre.get(carrera).get(semestre);
     }
 
+    public static void guardarEnJSON() {
+        UsuarioSerializer.serialize();
+    }
+
+    public static void leerJSON() {
+        UsuarioDeserializer.deserialize();
+    }
+
 }

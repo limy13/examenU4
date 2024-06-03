@@ -55,10 +55,9 @@ public class Profesor extends Usuario {
 
         //agregra metodo donde el profe elija sus materias
 
-        Profesor profesor = new Profesor(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, sueldo,  )
+        Profesor profesor = new Profesor(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, sueldo, materiasImparte, rfc, nombreUsuario, contrasena);
 
         Sistema.usuarios.get(Sistema.carrera).get(Rol.PROFESOR).add(profesor);
-
     }
 
     @Override
