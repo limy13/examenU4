@@ -2,11 +2,11 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Usuario {
-    private String nombre, apellido, ciudad, estado, curp, fechaRegistro, direccion, grupo, numeroControl, nombreUsuario, contrasena, fechaNacimiento;
+    private String nombre, apellido, ciudad, estado, curp, fechaRegistro, direccion, numeroControl, nombreUsuario, contrasena, fechaNacimiento;
     private Carreras carrera;
     private Rol rol;
 
-    public Usuario(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacimiento, Carreras carrera, Rol rol) {
+    public Usuario(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacimiento, Carreras carrera, Rol rol, String nombreUsuario, String contrasena) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.ciudad = ciudad;
@@ -18,6 +18,48 @@ public class Usuario {
         this.fechaNacimiento = fechaNacimiento;
         this.carrera = carrera;
         this.rol = rol;
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void setCurp(String curp) {
+        this.curp = curp;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setNumeroControl(String numeroControl) {
+        this.numeroControl = numeroControl;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getNombreUsuario() {

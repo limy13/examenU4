@@ -7,8 +7,8 @@ public class Coordinador extends Usuario {
     private double sueldo;
     private String [] materiasImparte;
 
-    public Coordinador(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacmiento, Carreras carrera, double sueldo, String[] materiasImparte) {
-        super(nombre, apellido, ciudad, estado, curp, direccion, numeroControl, fechaNacmiento, carrera, Rol.COORDINADOR);
+    public Coordinador(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacmiento, Carreras carrera, double sueldo, String[] materiasImparte, String nombreUsuario, String contrasena) {
+        super(nombre, apellido, ciudad, estado, curp, direccion, numeroControl, fechaNacmiento, carrera, Rol.COORDINADOR, nombreUsuario, contrasena);
         this.rfc = generarRfc(fechaNacmiento, nombre, apellido);
         this.sueldo = sueldo;
         this.materiasImparte = materiasImparte;

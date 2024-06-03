@@ -8,8 +8,8 @@ public class Profesor extends Usuario {
     private double sueldo;
     private ArrayList<String> materiasImparte;
 
-    public Profesor(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacimiento, Carreras carrera, double sueldo, ArrayList<String> materiasImparte, String rfc) {
-        super(nombre, apellido, ciudad, estado, curp, direccion, numeroControl, fechaNacimiento, carrera, Rol.PROFESOR);
+    public Profesor(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacimiento, Carreras carrera, double sueldo, ArrayList<String> materiasImparte, String rfc, String nombreUsuario, String contrasena) {
+        super(nombre, apellido, ciudad, estado, curp, direccion, numeroControl, fechaNacimiento, carrera, Rol.PROFESOR, nombreUsuario, contrasena);
         this.rfc = rfc;
         this.sueldo = sueldo;
         this.materiasImparte = materiasImparte;
@@ -25,6 +25,14 @@ public class Profesor extends Usuario {
 
     public double getSueldo() {
         return sueldo;
+    }
+
+    public void setSueldo(double sueldo) {
+        this.sueldo = sueldo;
+    }
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
     }
 
     public static void registrarProfesor() {
@@ -74,6 +82,60 @@ public class Profesor extends Usuario {
         String [] partesApellido = apellido.split(" ");
         return rfc = ("" + apellido.charAt(0) + apellido.charAt(1) + partesApellido[1].charAt(0) + nombre.charAt(0) +
                 partesNacimiento[0].charAt(2) + partesNacimiento[0].charAt(3) + partesNacimiento[1] + partesNacimiento[2] + homoclave).toUpperCase();
+    }
+
+    public static void modificarProfesor() { //poner trys
+        boolean band = false;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n---- Modificar profesor ----");
+        System.out.print("\nIngrese el número de control del profesor que desea modificar: ");
+        String numero = scanner.nextLine();
+        for(Usuario usuario : Sistema.usuarios.get(Sistema.carrera).get(Rol.PROFESOR)) {
+            if (numero.equals(usuario.getNumeroControl())) {
+                band = true;
+                Profesor profesor = (Profesor) usuario;
+                System.out.print("\nNombre: ");
+                String nombre = scanner.nextLine();
+                profesor.setNombre(nombre);
+                System.out.print("Apellido paterno: ");
+                String apellidoP = scanner.nextLine();
+                System.out.print("Apellido materno: ");
+                String apellidoM = scanner.nextLine();
+                profesor.setApellido(apellidoP.concat(" ").concat(apellidoM));
+                String fechaNacimiento = validarFecha(); // Método para validar fecha
+                profesor.setFechaNacimiento(fechaNacimiento);
+                System.out.print("Género (H/M): ");
+                String genero = scanner.nextLine().toUpperCase();
+                System.out.print("Estado: ");
+                String estado = validarEstado(scanner.nextLine());
+                profesor.setEstado(estado);
+                System.out.print("Ciudad: ");
+                String ciudad = scanner.nextLine();
+                profesor.setCiudad(ciudad);
+                System.out.print("Dirección: ");
+                String direccion = scanner.nextLine();
+                profesor.setDireccion(direccion);
+                String nombreUsuario = registrarNombreUsuario();
+                profesor.setNombreUsuario(nombreUsuario);
+                String numeroControl = generarNumeroControl(nombre.charAt(0), Rol.ALUMNO);
+                profesor.setNumeroControl(numeroControl);
+                System.out.print("Contraseña: ");
+                String contrasena = scanner.nextLine();
+                profesor.setContrasena(contrasena);
+                String curp = generarCurp(nombre, apellidoP, apellidoM, fechaNacimiento, genero, estado);
+                profesor.setCurp(curp);
+                System.out.println("Sueldo: ");
+                double sueldo = scanner.nextDouble();
+                profesor.setSueldo(sueldo);
+                String rfc = generarRfc(fechaNacimiento, nombre, apellidoP.concat(" ").concat(apellidoM));
+                profesor.setRfc(rfc);
+
+                //agregar metodo para que modifique sus materias
+            }
+        }
+        if(!band) {
+            System.out.println("\nEste número de control no pertenece a ningún profesor");
+        }
     }
 
 }

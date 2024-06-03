@@ -105,6 +105,7 @@ public class Menu {
                                 // Consultar  alumno
                                 break;
                             case "3":
+                                Alumno.modificarAlumno();
                                 // Modifica los datos de un alumno
                                 break;
                             case "4":
@@ -134,6 +135,7 @@ public class Menu {
             }
         } while (!decision.equals("5"));
     }
+
 
     public void menuAlumno(String nombreUsuario) {
         do {

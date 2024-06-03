@@ -18,4 +18,5 @@ public class Grupo {
         }
         //se registra a un alumno con metodo que los alumnos ya tendran
     }
+
 }
