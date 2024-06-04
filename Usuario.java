@@ -143,6 +143,7 @@ public class Usuario {
 
         //este metodo genera el numero de control para cualquier profe, alumno, coordinador
 
+        boolean band = false;
         String numeroControl = "";
         String caracter = rol == Rol.ALUMNO ? "l" : rol == Rol.PROFESOR ? "M" : "C";
         String siglasCarrera = Sistema.carrera == Carreras.ISC ? "ISC" : Sistema.carrera == Carreras.IMAT ? "IMAT" : "ELC";
@@ -154,12 +155,13 @@ public class Usuario {
             if(numeroPartes[0].equals(numeroControl)) {
                 int numero = Integer.parseInt(numeroPartes[1]) + 1;
                 numeroControl = numeroControl + "-" + numero;
+                band = true;
                 break;
             }
-            else {
-                numeroControl = numeroControl + "-" + 0;
-                break;
-            }
+        }
+
+        if(!band) {
+            numeroControl = numeroControl + "-" + 0;
         }
         return numeroControl;
     }

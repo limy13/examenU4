@@ -73,7 +73,7 @@ public class Menu {
             System.out.println("3. Calificaciones");
             System.out.println("4. Profesores");
             System.out.println("5. Avanzar de semestre");
-            System.out.println("6. Ver Informacion Personal");
+            System.out.println("6. Ver información personal");
             System.out.println("7. Cerrar sesión");
             System.out.print("\nIngrese opción: ");
             decision = scanner.nextLine();
@@ -91,7 +91,7 @@ public class Menu {
                         System.out.println("2. Consultar alumno");
                         System.out.println("3. Modificar datos de alumno");
                         System.out.println("4. Eliminar alumno");
-                        System.out.println("5. Regresar al menú de Gerente");
+                        System.out.println("5. Regresar al menú de Coordinador");
                         System.out.print("\nIngrese opción: ");
                         decisionAlumno = scanner.nextLine();
 
