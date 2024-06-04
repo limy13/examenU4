@@ -172,76 +172,6 @@ public class Usuario {
         return numeroControl;
     }
 
-    public static String validarEstado(String estado) {
-        Map<String, String> estados = new HashMap<>();
-        estados.put("AS", "Aguascalientes");
-        estados.put("BC", "Baja California");
-        estados.put("BS", "Baja California Sur");
-        estados.put("CC", "Campeche");
-        estados.put("CL", "Coahuila de Zaragoza");
-        estados.put("CM", "Colima");
-        estados.put("CS", "Chiapas");
-        estados.put("CH", "Chihuahua");
-        estados.put("DF", "Ciudad de México");
-        estados.put("DG", "Durango");
-        estados.put("GT", "Guanajuato");
-        estados.put("GR", "Guerrero");
-        estados.put("HG", "Hidalgo");
-        estados.put("JC", "Jalisco");
-        estados.put("MC", "México");
-        estados.put("MN", "Michoacán de Ocampo");
-        estados.put("MS", "Morelos");
-        estados.put("NT", "Nayarit");
-        estados.put("NL", "Nuevo León");
-        estados.put("OC", "Oaxaca");
-        estados.put("PL", "Puebla");
-        estados.put("QT", "Querétaro");
-        estados.put("QR", "Quintana Roo");
-        estados.put("SP", "San Luis Potosí");
-        estados.put("SL", "Sinaloa");
-        estados.put("SR", "Sonora");
-        estados.put("TC", "Tabasco");
-        estados.put("TS", "Tamaulipas");
-        estados.put("TL", "Tlaxcala");
-        estados.put("VZ", "Veracruz");
-        estados.put("YN", "Yucatán");
-        estados.put("ZS", "Zacatecas");
-
-        Scanner scanner = new Scanner(System.in);
-        String estadoUpper = estado.toUpperCase();
-
-        while (!estados.containsKey(estadoUpper)) {
-            System.out.println("El estado ingresado no es válido. Por favor, ingresa un estado de México.");
-            System.out.print("Ingresa un Estado válido: ");
-            estado = scanner.nextLine().toUpperCase();
-            estadoUpper = estado.toUpperCase();
-        }
-
-        return estados.get(estadoUpper);
-    }
-
-    public static String generarCurp(String nombre, String apellidoP, String apellidoM, String fechaNacimiento, String genero, String estado) {
-        String primerLetraApellidoP = apellidoP.substring(0, 1).toUpperCase();
-        String primeraVocalApellidoP = obtenerPrimeraVocal(apellidoP);
-        String primerLetraApellidoM = apellidoM.substring(0, 1).toUpperCase();
-        String primerLetraNombre = nombre.substring(0, 1).toUpperCase();
-        String[] fecha = fechaNacimiento.split("-");
-        String año = fecha[0].substring(2);
-        String mes = fecha[1];
-        String dia = fecha[2];
-
-        String curp = primerLetraApellidoP + primeraVocalApellidoP + primerLetraApellidoM + primerLetraNombre + año + mes + dia + genero + estado;
-
-        // Generar homoclave aleatoria
-        Random random = new Random();
-        String homoclave = "";
-        for (int i = 0; i < 3; i++) {
-            char caracter = "abcdefghijklmnopqrstuvwxyz0123456789".charAt(random.nextInt("abcdefghijklmnopqrstuvwxyz0123456789".length()));
-            homoclave += caracter;
-        }
-        curp += homoclave;
-        return curp.toUpperCase();
-    }
 
     public static String obtenerPrimeraVocal(String apellido) {
         String apellidoUpper = apellido.toUpperCase();
@@ -347,6 +277,78 @@ public class Usuario {
         System.out.println("Fecha de registro: " + this.fechaRegistro);
         System.out.println("Número de control: " + this.numeroControl);
         System.out.println("Carrera: " + this.carrera);
+    }
+
+    public static String validarEstado(String estado) {
+        Map<String, String> estados = new HashMap<>();
+        estados.put("AS", "Aguascalientes");
+        estados.put("BC", "Baja California");
+        estados.put("BS", "Baja California Sur");
+        estados.put("CC", "Campeche");
+        estados.put("CL", "Coahuila de Zaragoza");
+        estados.put("CM", "Colima");
+        estados.put("CS", "Chiapas");
+        estados.put("CH", "Chihuahua");
+        estados.put("DF", "Ciudad de México");
+        estados.put("DG", "Durango");
+        estados.put("GT", "Guanajuato");
+        estados.put("GR", "Guerrero");
+        estados.put("HG", "Hidalgo");
+        estados.put("JC", "Jalisco");
+        estados.put("MC", "México");
+        estados.put("MN", "Michoacán de Ocampo");
+        estados.put("MS", "Morelos");
+        estados.put("NT", "Nayarit");
+        estados.put("NL", "Nuevo León");
+        estados.put("OC", "Oaxaca");
+        estados.put("PL", "Puebla");
+        estados.put("QT", "Querétaro");
+        estados.put("QR", "Quintana Roo");
+        estados.put("SP", "San Luis Potosí");
+        estados.put("SL", "Sinaloa");
+        estados.put("SR", "Sonora");
+        estados.put("TC", "Tabasco");
+        estados.put("TS", "Tamaulipas");
+        estados.put("TL", "Tlaxcala");
+        estados.put("VZ", "Veracruz");
+        estados.put("YN", "Yucatán");
+        estados.put("ZS", "Zacatecas");
+
+        Scanner scanner = new Scanner(System.in);
+        String estadoUpper = estado.toUpperCase();
+
+        while (!estados.containsKey(estadoUpper)) {
+            System.out.println("El estado ingresado no es válido. Por favor, ingresa un estado de México.");
+            System.out.print("Ingresa un Estado válido: ");
+            estado = scanner.nextLine().toUpperCase();
+            estadoUpper = estado.toUpperCase();
+        }
+
+
+        return estadoUpper; // Retornamos la clave del estado en lugar del nombre completo
+    }
+
+    public static String generarCurp(String nombre, String apellidoP, String apellidoM, String fechaNacimiento, String genero, String estado) {
+        String primerLetraApellidoP = apellidoP.substring(0, 1).toUpperCase();
+        String primeraVocalApellidoP = obtenerPrimeraVocal(apellidoP);
+        String primerLetraApellidoM = apellidoM.substring(0, 1).toUpperCase();
+        String primerLetraNombre = nombre.substring(0, 1).toUpperCase();
+        String[] fecha = fechaNacimiento.split("-");
+        String año = fecha[0].substring(2);
+        String mes = fecha[1];
+        String dia = fecha[2];
+
+        String curp = primerLetraApellidoP + primeraVocalApellidoP + primerLetraApellidoM + primerLetraNombre + año + mes + dia + genero + estado;
+
+        Random random = new Random();
+        String homoclave = "";
+        for (int i = 0; i < 3; i++) {
+            char caracter = "abcdefghijklmnopqrstuvwxyz0123456789".charAt(random.nextInt("abcdefghijklmnopqrstuvwxyz0123456789".length()));
+            homoclave += caracter;
+        }
+        curp += homoclave;
+
+        return curp;
     }
 
 }
