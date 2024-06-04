@@ -188,6 +188,9 @@ public class Menu {
 
 
     public void menuAlumno(String nombreUsuario) {
+
+        Usuario usuarioActual = UsuarioEnSesion.obtenerInstancia().getUsuarioActual();
+
         do {
             System.out.println("\n**");
             System.out.println("\n---- BIENVENIDO ALUMNO ----\n");
@@ -201,13 +204,12 @@ public class Menu {
 
             switch (decision) {
                 case "1":
-                    //Ver calificacion
+                    ((Alumno) usuarioActual).mostrarCalificaciones();
                     break;
                 case "2":
                     //Ver Cursos Inscritos
                     break;
                 case "3":
-                    Usuario usuarioActual = UsuarioEnSesion.obtenerInstancia().getUsuarioActual();
                     ((Alumno) usuarioActual).verInformacionPersonal();
                     break;
                 case "4":
@@ -269,7 +271,7 @@ public class Menu {
 
             switch (dc) {
                 case "1":
-                    //Registrar Calificaciones
+                    asignarCalificaciones();
                     break;
                 case "2":
                     //Consultar Calificaciones
