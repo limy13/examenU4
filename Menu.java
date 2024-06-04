@@ -121,10 +121,9 @@ public class Menu {
                                 break;
                             case "3":
                                 Alumno.modificarAlumno();
-                                // Modifica los datos de un alumno
                                 break;
                             case "4":
-                                // Elimina un alumno
+                                Alumno.eliminarAlumno();
                                 break;
                             case "5":
                                 System.out.println("Regresando al menú principal");
@@ -160,7 +159,7 @@ public class Menu {
                                 Profesor.modificarProfesor();
                                 break;
                             case "4":
-                                // Elimina un profesor
+                                Profesor.eliminarProfesor();
                                 break;
                             case "5":
                                 System.out.println("Regresando al menú principal");

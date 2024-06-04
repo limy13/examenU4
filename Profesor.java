@@ -177,4 +177,30 @@ public class Profesor extends Usuario {
             System.out.println("Ocurrió un error al mostrar la información del profesor. Por favor, intente de nuevo.");
         }
     }
+
+    public static void eliminarProfesor() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("\n---- Eliminar Profesor ----");
+            System.out.print("Ingrese el número de control del profesor que desea eliminar: ");
+            String numero = scanner.nextLine();
+
+            Profesor profesorAEliminar = null;
+            for (Usuario usuario : Sistema.usuarios.get(Sistema.carrera).get(Rol.PROFESOR)) {
+                if (numero.equals(usuario.getNumeroControl())) {
+                    profesorAEliminar = (Profesor) usuario;
+                    break;
+                }
+            }
+
+            if (profesorAEliminar != null) {
+                Sistema.usuarios.get(Sistema.carrera).get(Rol.PROFESOR).remove(profesorAEliminar);
+                System.out.println("\nAlumno eliminado exitosamente.");
+            } else {
+                System.out.println("\nNo se encontró ningún alumno con el número de control ingresado");
+            }
+        } catch (Exception e) {
+            System.out.println("Ocurrió un error al eliminar al alumno. Por favor, intente de nuevo");
+        }
+    }
 }

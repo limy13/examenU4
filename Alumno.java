@@ -148,4 +148,30 @@ public class Alumno extends Usuario {
             System.out.println("Ocurrió un error al modificar al alumno. Por favor, intente de nuevo.");
         }
     }
+
+    public static void eliminarAlumno() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("\n---- Eliminar alumno ----");
+            System.out.print("Ingrese el número de control del alumno que desea eliminar: ");
+            String numero = scanner.nextLine();
+
+            Alumno alumnoAEliminar = null;
+            for (Usuario usuario : Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO)) {
+                if (numero.equals(usuario.getNumeroControl())) {
+                    alumnoAEliminar = (Alumno) usuario;
+                    break;
+                }
+            }
+
+            if (alumnoAEliminar != null) {
+                Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO).remove(alumnoAEliminar);
+                System.out.println("\nAlumno eliminado exitosamente.");
+            } else {
+                System.out.println("\nNo se encontró ningún alumno con el número de control ingresado.");
+            }
+        } catch (Exception e) {
+            System.out.println("Ocurrió un error al eliminar al alumno. Por favor, intente de nuevo.");
+        }
+    }
 }
