@@ -137,4 +137,12 @@ public class Profesor extends Usuario {
         }
     }
 
+    public void verInformacionProfesor() {
+        super.verInformacionPersonal();
+        System.out.println("RFC: " + this.rfc);
+        System.out.println("Sueldo: " + this.sueldo);
+        System.out.println("Materias que imparte: " + String.join(", ", this.materiasImparte));
+        //Agregar atributo de materias que imparte
+    }
+
 }

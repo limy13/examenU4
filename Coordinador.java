@@ -28,4 +28,14 @@ public class Coordinador extends Usuario {
         return rfc = ("" + apellido.charAt(0) + apellido.charAt(1) + partesApellido[1].charAt(0) + nombre.charAt(0) +
                 partesNacimiento[0].charAt(2) + partesNacimiento[0].charAt(3) + partesNacimiento[1] + partesNacimiento[2] + homoclave).toUpperCase();
     }
+
+    public void verInformacionCoordinador() {
+        super.verInformacionPersonal();
+        System.out.println("RFC: " + this.rfc);
+        System.out.println("Sueldo: " + this.sueldo);
+        System.out.println("Materias que imparte: ");
+        for (String materia : this.materiasImparte) {
+            System.out.println(" - " + materia);
+        }
+    }
 }
