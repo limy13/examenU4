@@ -81,10 +81,6 @@ public class Alumno extends Usuario {
             String contrasena = datosComun.get(8);
             String numeroControl = datosComun.get(9);
 
-            System.out.print("Ingrese el semestre del alumno: ");
-            int semestre = scanner.nextInt();
-            scanner.nextLine(); // Consumir la nueva línea después de nextInt()
-
             Alumno alumno = new Alumno(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, 1, nombreUsuario, contrasena);
 
             // Asegúrate de que la lista de alumnos para la carrera actual no sea null
