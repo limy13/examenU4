@@ -1,11 +1,18 @@
+import java.util.Map;
+
 public class Materia {
 
     private String nombre;
     private double calificacion;
+    private Map<Alumno, Double> calificaciones;
 
     public Materia(String nombre) {
         this.nombre = nombre;
         this.calificacion = -1; // Inicialmente sin calificación, -1 indica que no ha sido calificada.
+    }
+
+    public <V, K> Map<K,V> getCalificaciones() {
+        return (Map<K, V>) calificaciones;
     }
 
     public String getNombre() {
@@ -23,4 +30,16 @@ public class Materia {
             System.out.println("Calificación inválida. Debe estar entre 0 y 100.");
         }
     }
+
+    public void mostrarCalificacionesAlumno(Alumno alumno) {
+        if (calificaciones.containsKey(alumno)) {
+            System.out.println("Calificaciones de " + alumno.getNombre() + " para la materia " + this.nombre + ":");
+            for (Map.Entry<Alumno, Double> entry : calificaciones.entrySet()) {
+                System.out.println(" - " + entry.getValue());
+            }
+        } else {
+            System.out.println("El alumno " + alumno.getNombre() + " no tiene calificación para la materia " + this.nombre);
+        }
+    }
 }
+

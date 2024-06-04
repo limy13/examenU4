@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.HashMap;
+import java.util.*;
 
 public class Alumno extends Usuario {
     private ArrayList<Materia> materias;
@@ -9,12 +6,13 @@ public class Alumno extends Usuario {
     private double promedio;
     private String grupo;
     private ArrayList<Materia> materiasInscritas;
+    private HashMap<String, Materia> materiasConCalificaciones;
 
     public Alumno(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacimiento, Carreras carrera, int semestre, String nombreUsuario, String contrasena) {
         super(nombre, apellido, ciudad, estado, curp, direccion, numeroControl, fechaNacimiento, carrera, Rol.ALUMNO, nombreUsuario, contrasena);
         this.materias = new ArrayList<>();
         this.semestre = semestre;
-
+        this.materiasConCalificaciones = new HashMap<>();
         this.materiasInscritas = new ArrayList<>();
         asignarMaterias(carrera, semestre);
     }
@@ -172,6 +170,20 @@ public class Alumno extends Usuario {
             }
         } catch (Exception e) {
             System.out.println("Ocurrió un error al eliminar al alumno. Por favor, intente de nuevo.");
+        }
+    }
+
+    public void mostrarCalificaciones() {
+        System.out.println("Calificaciones de " + this.getNombre() + " " + this.getApellido() + ":");
+        for (Map.Entry<String, Materia> entry : materiasConCalificaciones.entrySet()) {
+            String materiaNombre = entry.getKey();
+            Materia materia = entry.getValue();
+            double calificacion = materia.getCalificacion();
+            if (calificacion != -1) {
+                System.out.println(materiaNombre + ": " + calificacion);
+            } else {
+                System.out.println(materiaNombre + ": Sin calificar");
+            }
         }
     }
 }

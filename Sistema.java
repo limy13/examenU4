@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Sistema {
 
@@ -65,6 +66,43 @@ public class Sistema {
 
     public static String[] obtenerMaterias(Carreras carrera, int semestre) {
         return materiasPorCarreraYSemestre.get(carrera).get(semestre);
+    }
+
+    public static void asignarCalificaciones(Alumno alumno, Map<String, Materia> materiasConCalificaciones) {
+        Scanner scanner = new Scanner(System.in);
+        int calificacionesAsignadas = 0;
+
+        for (Map.Entry<String, Materia> entry : materiasConCalificaciones.entrySet()) {
+            String materiaNombre = entry.getKey();
+            Materia materia = entry.getValue();
+
+            // Verificar si la materia ya tiene calificación asignada para el alumno
+            if (materia.getCalificacion() != -1) {
+                System.out.println("La materia " + materiaNombre + " ya tiene una calificación asignada.");
+                continue; // Saltar a la siguiente materia
+            }
+
+            // Solicitar calificación para la materia
+            double calificacion;
+            do {
+                System.out.print("Ingrese la calificación para la materia " + materiaNombre + " del estudiante " + alumno.getNombre() + ": ");
+                while (!scanner.hasNextDouble()) {
+                    System.out.println("Error: la calificación debe ser un número decimal.");
+                    scanner.next(); // Descartar la entrada no válida
+                }
+                calificacion = scanner.nextDouble();
+            } while (calificacion < 0 || calificacion > 100);
+
+            materia.setCalificacion(calificacion);
+            calificacionesAsignadas++;
+            System.out.println("Calificación asignada correctamente para la materia " + materiaNombre);
+
+            // Almacenar la calificación específica del alumno en el mapa de calificaciones de la materia
+            materia.getCalificaciones().put(alumno, calificacion);
+        }
+
+        scanner.close();
+        System.out.println("Total de calificaciones asignadas: " + calificacionesAsignadas);
     }
 
 //    public static void guardarEnJSON() {

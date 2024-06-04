@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Profesor extends Usuario {
 
@@ -201,6 +198,38 @@ public class Profesor extends Usuario {
             }
         } catch (Exception e) {
             System.out.println("Ocurrió un error al eliminar al alumno. Por favor, intente de nuevo");
+        }
+    }
+
+    public static void asignarCalificaciones(Alumno alumno, Map<String, Materia> materiasConCalificaciones) {
+        Scanner scanner = new Scanner(System.in);
+
+        for (Map.Entry<String, Materia> entry : materiasConCalificaciones.entrySet()) {
+            String materiaNombre = entry.getKey();
+            Materia materia = entry.getValue();
+
+            // Verificar si la materia ya tiene calificación asignada
+            if (materia.getCalificacion() != -1) {
+                System.out.println("La materia " + materiaNombre + " ya tiene una calificación asignada.");
+                continue; // Saltar a la siguiente materia
+            }
+
+            // Solicitar calificación para la materia
+            double calificacion;
+            do {
+                System.out.print("Ingrese la calificación para la materia " + materiaNombre + " del estudiante " + alumno.getNombre() + ": ");
+                while (!scanner.hasNextDouble()) {
+                    System.out.println("Error: la calificación debe ser un número decimal.");
+                    scanner.next(); // Descartar la entrada no válida
+                }
+                calificacion = scanner.nextDouble();
+            } while (calificacion < 0 || calificacion > 100);
+
+            materia.setCalificacion(calificacion);
+            System.out.println("Calificación asignada correctamente para la materia " + materiaNombre);
+
+            // Almacenar la calificación (opcional)
+            // ...
         }
     }
 }
