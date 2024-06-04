@@ -1,16 +1,20 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashMap;
 
-public class Alumno extends Usuario{
+public class Alumno extends Usuario {
     private ArrayList<Materia> materias;
     private int semestre;
     private double promedio;
-    private String grupo; //esto puede cambiarse
+    private String grupo;
+    private ArrayList<Materia> materiasInscritas;
 
     public Alumno(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacimiento, Carreras carrera, int semestre, String nombreUsuario, String contrasena) {
         super(nombre, apellido, ciudad, estado, curp, direccion, numeroControl, fechaNacimiento, carrera, Rol.ALUMNO, nombreUsuario, contrasena);
         this.materias = new ArrayList<>();
         this.semestre = semestre;
+
+        this.materiasInscritas = new ArrayList<>();
         asignarMaterias(carrera, semestre);
     }
 
@@ -21,9 +25,11 @@ public class Alumno extends Usuario{
         }
     }
 
-    public ArrayList<Materia> getMaterias() {
-        return materias;
-    }
+    public ArrayList<Materia> getMaterias() { return materias;}
+
+    public ArrayList<Materia> getMateriasInscritas() { return materiasInscritas; }
+
+    public void setMateriasInscritas(ArrayList<Materia> materiasInscritas) {this.materiasInscritas = materiasInscritas;}
 
     @Override
     public void verInformacionPersonal() {
@@ -33,14 +39,46 @@ public class Alumno extends Usuario{
         System.out.println("Promedio: " + this.promedio);
     }
 
-    public static void modificarAlumno() { //poner trys
+    public static void registrarAlumno() {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<String> datosComun = Usuario.datosComun(Rol.ALUMNO);
+        String nombre = datosComun.get(0);
+        String apellidos = datosComun.get(1);
+        String fechaNacimiento = datosComun.get(2);
+        String estado = datosComun.get(3);
+        String ciudad = datosComun.get(4);
+        String direccion = datosComun.get(5);
+        String curp = datosComun.get(6);
+        String nombreUsuario = datosComun.get(7);
+        String contrasena = datosComun.get(8);
+        String numeroControl = datosComun.get(9);
+
+        System.out.print("Ingrese el semestre del alumno: ");
+        int semestre = scanner.nextInt();
+        scanner.nextLine(); // Consumir la nueva línea después de nextInt()
+
+        Alumno alumno = new Alumno(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, semestre, nombreUsuario, contrasena);
+
+        // Asegúrate de que la lista de alumnos para la carrera actual no sea null
+        if (!Sistema.usuarios.containsKey(Sistema.carrera)) {
+            Sistema.usuarios.put(Sistema.carrera, new HashMap<>());
+        }
+        if (!Sistema.usuarios.get(Sistema.carrera).containsKey(Rol.ALUMNO)) {
+            Sistema.usuarios.get(Sistema.carrera).put(Rol.ALUMNO, new ArrayList<>());
+        }
+
+        // Agrega el alumno a la lista correspondiente
+        Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO).add(alumno);
+    }
+
+    public static void modificarAlumno() {
         boolean band = false;
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n---- Modificar alumno ----");
-        System.out.print("Ingrese el número de control del profesor que desea modificar: ");
+        System.out.print("Ingrese el número de control del alumno que desea modificar: ");
         String numero = scanner.nextLine();
-        for(Usuario usuario : Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO)) {
-            if(numero.equals(usuario.getNumeroControl())) {
+        for (Usuario usuario : Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO)) {
+            if (numero.equals(usuario.getNumeroControl())) {
                 band = true;
                 System.out.print("\nNombre: ");
                 String nombre = scanner.nextLine();
@@ -74,7 +112,7 @@ public class Alumno extends Usuario{
                 usuario.setCurp(curp);
             }
         }
-        if(!band) {
+        if (!band) {
             System.out.println("\nEste número de control no pertenece a ningún alumno");
         }
     }
