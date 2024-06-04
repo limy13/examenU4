@@ -230,9 +230,15 @@ public class Usuario {
 
         String curp = primerLetraApellidoP + primeraVocalApellidoP + primerLetraApellidoM + primerLetraNombre + año + mes + dia + genero + estado;
 
-        curp += "00"; //Los 0 son por la homoclave, me da flojera hacerla jaja
-
-        return curp;
+        // Generar homoclave aleatoria
+        Random random = new Random();
+        String homoclave = "";
+        for (int i = 0; i < 3; i++) {
+            char caracter = "abcdefghijklmnopqrstuvwxyz0123456789".charAt(random.nextInt("abcdefghijklmnopqrstuvwxyz0123456789".length()));
+            homoclave += caracter;
+        }
+        curp += homoclave;
+        return curp.toUpperCase();
     }
 
     public static String obtenerPrimeraVocal(String apellido) {

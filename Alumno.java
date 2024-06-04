@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.HashMap;
 
@@ -36,6 +37,20 @@ public class Alumno extends Usuario {
 
     public ArrayList<Materia> getMateriasInscritas() {
         return materiasInscritas;
+    }
+
+    public int getSemestre() {
+        return semestre;
+    }
+
+    public static List<Alumno> filtrarPorSemestre(List<Alumno> alumnos, int semestre) {
+        List<Alumno> alumnosFiltrados = new ArrayList<>();
+        for (Alumno alumno : alumnos) {
+            if (alumno.getSemestre() == semestre) {
+                alumnosFiltrados.add(alumno);
+            }
+        }
+        return alumnosFiltrados;
     }
 
     public void setMateriasInscritas(ArrayList<Materia> materiasInscritas) {

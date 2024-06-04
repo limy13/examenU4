@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -100,7 +102,22 @@ public class Menu {
                                 Alumno.registrarAlumno();
                                 break;
                             case "2":
-                                // Consultar  alumno
+                                System.out.println("Ingrese el semestre del que quiera ver los alumnos");
+                                String sem = scanner.nextLine();
+                                switch (sem){
+                                    case "1":
+                                        verListaAlumnosPorSemestre(1);
+                                        break;
+                                    case "2":
+                                        verListaAlumnosPorSemestre(2);
+                                        break;
+                                    case "3":
+                                        verListaAlumnosPorSemestre(3);
+                                        break;
+                                    default:
+                                        System.out.println("Ingrese una opcion valida");
+                                        break;
+                                }
                                 break;
                             case "3":
                                 Alumno.modificarAlumno();
@@ -144,7 +161,7 @@ public class Menu {
 
     public void menuAlumno(String nombreUsuario) {
         do {
-            System.out.println("\n******");
+            System.out.println("\n****");
             System.out.println("\n---- BIENVENIDO ALUMNO ----\n");
             System.out.println("Usuario: " + nombreUsuario);
             System.out.println("\n1. Ver mis calificaciones");
@@ -177,7 +194,7 @@ public class Menu {
 
     public void menuProfesor(String nombreUsuario) {
         do {
-            System.out.println("\n******");
+            System.out.println("\n****");
             System.out.println("\n---- BIENVENIDO MAESTRO ----\n");
             System.out.println("Usuario: " + nombreUsuario);
             System.out.println("\n1. Ver mis grupos");
@@ -240,5 +257,25 @@ public class Menu {
                     break;
             }
         } while (!dc.equals("4"));
+    }
+
+    private void verListaAlumnosPorSemestre(int semestre) {
+        ArrayList<Usuario> usuarios = Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO);
+
+        List<Alumno> alumnos = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            alumnos.add((Alumno) usuario);
+        }
+
+        List<Alumno> alumnosFiltrados = Alumno.filtrarPorSemestre(alumnos, semestre);
+
+        if (!alumnosFiltrados.isEmpty()) {
+            System.out.println("\nLista de alumnos del semestre " + semestre + ":");
+            for (Alumno alumno : alumnosFiltrados) {
+                alumno.verInformacionPersonal();
+            }
+        } else {
+            System.out.println("No hay alumnos inscritos en el semestre especificado.");
+        }
     }
 }
