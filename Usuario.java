@@ -195,18 +195,17 @@ public class Usuario {
         estados.put("YN", "Yucatán");
         estados.put("ZS", "Zacatecas");
 
+        Scanner scanner = new Scanner(System.in);
         String estadoUpper = estado.toUpperCase();
 
-        if (estados.containsKey(estadoUpper)) {
-            return estadoUpper;
-        } else {
-            Scanner scanner = new Scanner(System.in);
-            while (!estados.containsKey(estadoUpper)) {
-                System.out.print("Ingresa un Estado que si Exista" );
-                estadoUpper = scanner.nextLine().toUpperCase();
-            }
+        while (!estados.containsKey(estadoUpper)) {
+            System.out.println("El estado ingresado no es válido. Por favor, ingresa un estado de México.");
+            System.out.print("Ingresa un Estado válido: ");
+            estado = scanner.nextLine().toUpperCase();
+            estadoUpper = estado.toUpperCase();
         }
-        return estadoUpper;
+
+        return estados.get(estadoUpper);
     }
 
     public static String generarCurp(String nombre, String apellidoP, String apellidoM, String fechaNacimiento, String genero, String estado) {

@@ -62,9 +62,10 @@ public class Menu {
         }
     }
 
+
     public void menuCoordinador(String nombreUsuario) {
         do {
-            System.out.println("\n******");
+            System.out.println("\n****");
             System.out.println("\n---- BIENVENIDO COORDINADOR ----\n");
             System.out.println(nombreUsuario);
             System.out.println("\n1. Mostrar registro de alumnos graduados");
@@ -89,13 +90,13 @@ public class Menu {
                         System.out.println("2. Consultar alumno");
                         System.out.println("3. Modificar datos de alumno");
                         System.out.println("4. Eliminar alumno");
-                        System.out.println("5. Regresar al menú principal");
+                        System.out.println("5. Regresar al menú de Gerente");
                         System.out.print("\nIngrese opción: ");
                         decisionAlumno = scanner.nextLine();
 
                         switch (decisionAlumno) {
                             case "1":
-                                // Registra alumno
+                                Alumno.registrarAlumno();
                                 break;
                             case "2":
                                 // Consultar  alumno
@@ -123,13 +124,15 @@ public class Menu {
                     //Avanzar semestre
                     break;
                 case "5":
+                    break;
+                case "6":
                     System.out.println("Cerrando Sesion");
                     break;
                 default:
                     System.out.println("Elige una opción Valida");
                     break;
             }
-        } while (!decision.equals("5"));
+        } while (!decision.equals("6"));
     }
 
 
