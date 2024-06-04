@@ -11,6 +11,9 @@ public class Carrera {
     private String coordinador;
     private String abreviacion;
 
+    ArrayList<Semestre> semestres = new ArrayList<>();
+    ArrayList<Alumno> graduados = new ArrayList<Alumno>();
+
     public Carrera(int id, String nombreCarrera, int cantidadGrupos, int cantidadAlumnos, int cantidadMaterias, String fechaCreacion, String coordinador, String abreviacion) {
         this.id = id;
         this.nombreCarrera = nombreCarrera;
@@ -20,28 +23,48 @@ public class Carrera {
         this.fechaCreacion = fechaCreacion;
         this.coordinador = coordinador;
         this.abreviacion = abreviacion;
+        anadirSemestre();
     }
 
-    ArrayList<Semestre> semestres;
-    Semestre semestre1 = new Semestre(1);
-    Semestre semestre2 = new Semestre(2);
-    Semestre semestre3 = new Semestre(3);
-    ArrayList<Alumno> graduados = new ArrayList<Alumno>();
+    Semestre procesoPrimeraVezSemestre(){
+        Semestre semestre = new Semestre();
+        System.out.println("** SE CREÓ UN NUEVO PRIMER SEMESTRE **");
+        System.out.println("Se creó el grupo A de el semestre 1 de la carrera " + this.nombreCarrera +": ");
+        for (int i = 0; i < semestres.size(); i++) {
 
-    Carrera(){
-        semestres.add(semestre1);
+        }
+        System.out.println("Para que el grupo pueda se requieren 3 alumnos, se crean a continuacion:");
+
+        return semestre;
     }
-    void procesoDeInicioDeSemestre(){
 
-        //tienen que existir minimo 3 alumnos
-        //se asignan los alumnos a su respectivo grupo
+    void anadirSemestre(){
+        semestres.add(procesoPrimeraVezSemestre());
+    }
 
-        /*
-        si es la primera vez que se inicia el programa se crea uno
-        cuando se aprueban las materias suben de semestre 1 a 2, 2 a 3 y de 3 a graduados
-        si se aprueban materias y pasa el semestre 1 a 2 se queda vacio el semestre 1 hasta que
-         se añadan nuevos alumnos
-        */
+    Semestre anadirAlumnosReprobadosAGrupoCorrespondiente(Semestre semestreNuevo){
+        for (Semestre semestre : semestres) {
+            ArrayList<Alumno> vacio = new ArrayList<>();
+            for (int i = 0; i < semestre.getGrupos().size(); i++) {
+                semestreNuevo.getGrupos().get(i).setAlumnos(semestre.getGrupos().get(i).getReprobados());
+                semestre.getGrupos().get(i).setReprobados(vacio);
+            }
+        }
+        return semestreNuevo;
+    }
+
+    void subirDeGradoSemestres(){
+        for(Semestre semestre : semestres){
+            semestre.setNumeroDeSemestre(semestre.getNumeroDeSemestre() + 1);
+            for (Grupo grupo : semestre.getGrupos()) {
+                for (int j = 0; j < grupo.getNumeroAlumnos(); j++) {
+                    if (grupo.estaReprobadoElAlumno(grupo.getAlumnos().get(j))) {
+                        grupo.anadirReprobado(grupo.getAlumnos().get(j));
+                        grupo.getAlumnos().remove(grupo.getAlumnos().get(j));
+                    }
+                }
+            }
+        }
     }
 
     String mostrarSemestres(Semestre semestre){

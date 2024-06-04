@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 
 public class Semestre {
-    int numeroDeSemestre;
-    ArrayList<Grupo> grupos = new ArrayList<>();
-    Grupo grupoA = new Grupo();
-    Grupo grupoB = new Grupo();
-    int contadorGrupos = 1;
-    Semestre(int numeroDeSemestre){
-        this.numeroDeSemestre = numeroDeSemestre;
+    private int numeroDeSemestre = 1;
+    private ArrayList<Grupo> grupos = new ArrayList<>();
+    private Grupo grupoA = new Grupo();
+    private Grupo grupoB = new Grupo();
+    private int contadorGrupos = 1;
+
+    Semestre(){
         grupos.add(grupoA);
     }
 
@@ -42,5 +42,13 @@ public class Semestre {
 
     public int getNumeroDeSemestre() {
         return numeroDeSemestre;
+    }
+
+    public void setNumeroDeSemestre(int numeroDeSemestre) {
+        this.numeroDeSemestre = numeroDeSemestre;
+    }
+
+    public ArrayList<Grupo> getGrupos() {
+        return grupos;
     }
 }
