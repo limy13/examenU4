@@ -139,8 +139,37 @@ public class Menu {
                     menuCalificaciones();
                     break;
                 case "4":
-                    //Hacer el menu
-                    Profesor.registrarProfesor();
+                    String decisionProfesor;
+                    do {
+                        System.out.println("\n---- MENÚ DE PROFESORES ----\n");
+                        System.out.println("1. Registrar Profesor");
+                        System.out.println("2. Consultar Profesores");
+                        System.out.println("3. Modificar datos de un Profesor");
+                        System.out.println("4. Eliminar Profesor");
+                        System.out.println("5. Regresar al menú de Coordinador");
+                        System.out.print("\nIngrese opción: ");
+                        decisionAlumno = scanner.nextLine();
+
+                        switch (decisionAlumno) {
+                            case "1":
+                                Profesor.registrarProfesor();
+                                break;
+                            case "2":
+                                //Consultar profesores
+                            case "3":
+                                Profesor.modificarProfesor();
+                                break;
+                            case "4":
+                                // Elimina un profesor
+                                break;
+                            case "5":
+                                System.out.println("Regresando al menú principal");
+                                break;
+                            default:
+                                System.out.println("Elige una opción Valida");
+                                break;
+                        }
+                    } while (!decisionAlumno.equals("5"));
                     break;
                 case "5":
                     break;
@@ -161,7 +190,7 @@ public class Menu {
 
     public void menuAlumno(String nombreUsuario) {
         do {
-            System.out.println("\n****");
+            System.out.println("\n**");
             System.out.println("\n---- BIENVENIDO ALUMNO ----\n");
             System.out.println("Usuario: " + nombreUsuario);
             System.out.println("\n1. Ver mis calificaciones");
@@ -194,7 +223,7 @@ public class Menu {
 
     public void menuProfesor(String nombreUsuario) {
         do {
-            System.out.println("\n****");
+            System.out.println("\n**");
             System.out.println("\n---- BIENVENIDO MAESTRO ----\n");
             System.out.println("Usuario: " + nombreUsuario);
             System.out.println("\n1. Ver mis grupos");
