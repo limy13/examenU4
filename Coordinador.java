@@ -63,4 +63,24 @@ public class Coordinador extends Usuario {
         }
 
     }
+
+    public void verProfesoresPorCarrera() {
+        try {
+            ArrayList<Profesor> profesoresCarrera = new ArrayList<>();
+            for (Usuario usuario : Sistema.usuarios.get(this.getCarrera()).get(Rol.PROFESOR)) {
+                profesoresCarrera.add((Profesor) usuario);
+            }
+
+            if (!profesoresCarrera.isEmpty()) {
+                System.out.println("\nProfesores de la misma carrera:");
+                for (Profesor profesor : profesoresCarrera) {
+                    profesor.verInformacionPersonal();
+                }
+            } else {
+                System.out.println("No hay profesores asignados a esta carrera.");
+            }
+        } catch (Exception e) {
+            System.out.println("Ocurrió un error al mostrar la lista de profesores por carrera. Por favor, intente de nuevo.");
+        }
+    }
 }

@@ -135,6 +135,7 @@ public class Menu {
                     } while (!decisionAlumno.equals("5"));
                     break;
                 case "3":
+                    //No estoy segura de que esto funcione jaja
                     menuCalificaciones();
                     break;
                 case "4":
@@ -147,14 +148,17 @@ public class Menu {
                         System.out.println("4. Eliminar Profesor");
                         System.out.println("5. Regresar al menú de Coordinador");
                         System.out.print("\nIngrese opción: ");
-                        decisionAlumno = scanner.nextLine();
+                        decisionProfesor = scanner.nextLine();
 
-                        switch (decisionAlumno) {
+                        switch (decisionProfesor) {
                             case "1":
                                 Profesor.registrarProfesor();
                                 break;
                             case "2":
                                 //Consultar profesores
+                                Usuario usuarioActual = UsuarioEnSesion.obtenerInstancia().getUsuarioActual();
+                                ((Coordinador) usuarioActual).verProfesoresPorCarrera();
+                                break;
                             case "3":
                                 Profesor.modificarProfesor();
                                 break;
@@ -168,7 +172,7 @@ public class Menu {
                                 System.out.println("Elige una opción Valida");
                                 break;
                         }
-                    } while (!decisionAlumno.equals("5"));
+                    } while (!decisionProfesor.equals("5"));
                     break;
                 case "5":
                     break;

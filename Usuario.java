@@ -46,6 +46,8 @@ public class Usuario {
         this.curp = curp;
     }
 
+    public String getApellido() {return apellido;}
+
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
@@ -346,6 +348,5 @@ public class Usuario {
         System.out.println("Número de control: " + this.numeroControl);
         System.out.println("Carrera: " + this.carrera);
     }
-
 
 }
