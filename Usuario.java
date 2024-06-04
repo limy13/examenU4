@@ -153,7 +153,11 @@ public class Usuario {
             String [] numeroPartes = usuario.getNumeroControl().split("-");
             if(numeroPartes[0].equals(numeroControl)) {
                 int numero = Integer.parseInt(numeroPartes[1]) + 1;
-                numeroControl = numeroControl + numero;
+                numeroControl = numeroControl + "-" + numero;
+                break;
+            }
+            else {
+                numeroControl = numeroControl + "-" + 0;
                 break;
             }
         }

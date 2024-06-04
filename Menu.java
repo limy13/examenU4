@@ -57,7 +57,7 @@ public class Menu {
                 break;
             case ALUMNO: menuAlumno(usuario.getNombreUsuario());
                 break;
-            case PROFESOR: menuAlumno(usuario.getNombreUsuario());
+            case PROFESOR: menuProfesor(usuario.getNombreUsuario());
                 break;
         }
     }
@@ -67,7 +67,7 @@ public class Menu {
         do {
             System.out.println("\n**");
             System.out.println("\n---- BIENVENIDO COORDINADOR ----\n");
-            System.out.println(nombreUsuario);
+            System.out.println("Usuario: " + nombreUsuario);
             System.out.println("\n1. Mostrar registro de alumnos graduados");
             System.out.println("2. Alumnos");
             System.out.println("3. Calificaciones");
