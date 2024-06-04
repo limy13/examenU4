@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public abstract class UsuarioSerializer {
-//
+
 //    public static void serialize() {
 //        Gson json = new GsonBuilder().setPrettyPrinting().create();
 //        try {

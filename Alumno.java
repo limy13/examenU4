@@ -70,7 +70,7 @@ public class Alumno extends Usuario {
             int semestre = scanner.nextInt();
             scanner.nextLine(); // Consumir la nueva línea después de nextInt()
 
-            Alumno alumno = new Alumno(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, semestre, nombreUsuario, contrasena);
+            Alumno alumno = new Alumno(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, 1, nombreUsuario, contrasena);
 
             // Asegúrate de que la lista de alumnos para la carrera actual no sea null
             if (!Sistema.usuarios.containsKey(Sistema.carrera)) {

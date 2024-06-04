@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Coordinador extends Usuario {
 
@@ -37,5 +39,28 @@ public class Coordinador extends Usuario {
         for (String materia : this.materiasImparte) {
             System.out.println(" - " + materia);
         }
+    }
+
+    public void asignarCalificaciones(Alumno estudiante, Map<String, Materia> materiasConCalificaciones) {
+        Scanner scanner = new Scanner(System.in);
+
+        for (Map.Entry<String, Materia> entry : materiasConCalificaciones.entrySet()) {
+            String materiaNombre = entry.getKey();
+            Materia materia = entry.getValue();
+
+            // Verificar si la materia ya tiene calificación asignada
+            if (materia.getCalificacion() != -1) {
+                System.out.println("La materia " + materiaNombre + " ya tiene una calificación asignada.");
+                continue; // Saltar a la siguiente materia
+            }
+
+            // Solicitar calificación para la materia
+            System.out.print("Ingrese la calificación para la materia " + materiaNombre + " del estudiante " + estudiante.getNombre() + ": ");
+            double calificacion = scanner.nextDouble();
+            materia.setCalificacion(calificacion);
+            System.out.println("Calificación asignada correctamente para la materia " + materiaNombre);
+
+        }
+
     }
 }
