@@ -4,15 +4,16 @@ public class Alumno extends Usuario {
     private ArrayList<Materia> materias;
     private int semestre;
     private double promedio;
-    private String grupo;
+    private char grupo;
     private ArrayList<Materia> materiasInscritas;
     private HashMap<String, Materia> materiasConCalificaciones;
 
-    public Alumno(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacimiento, Carreras carrera, int semestre, String nombreUsuario, String contrasena) {
+    public Alumno(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacimiento, Carreras carrera, char grupo, int semestre, String nombreUsuario, String contrasena) {
         super(nombre, apellido, ciudad, estado, curp, direccion, numeroControl, fechaNacimiento, carrera, Rol.ALUMNO, nombreUsuario, contrasena);
         this.materias = new ArrayList<>();
         this.semestre = semestre;
         this.materiasConCalificaciones = new HashMap<>();
+        this.grupo = grupo;
         this.materiasInscritas = new ArrayList<>();
         asignarMaterias(carrera, semestre);
     }
@@ -78,8 +79,10 @@ public class Alumno extends Usuario {
             String nombreUsuario = datosComun.get(7);
             String contrasena = datosComun.get(8);
             String numeroControl = datosComun.get(9);
+            System.out.println("Inserte el grupo del Alumno (A/B)");
+            char grupo = scanner.nextLine().charAt(0);
 
-            Alumno alumno = new Alumno(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, 1, nombreUsuario, contrasena);
+            Alumno alumno = new Alumno(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, grupo,1, nombreUsuario, contrasena);
 
             // Asegúrate de que la lista de alumnos para la carrera actual no sea null
             if (!Sistema.usuarios.containsKey(Sistema.carrera)) {
@@ -185,5 +188,9 @@ public class Alumno extends Usuario {
                 System.out.println(materiaNombre + ": Sin calificar");
             }
         }
+    }
+
+    public void setGrupo(char grupo) {
+        this.grupo = grupo;
     }
 }
