@@ -14,7 +14,7 @@ public class Alumno extends Usuario {
     private ArrayList<Materia> materiasInscritas;
     private HashMap<String, Materia> materiasConCalificaciones;
 
-    public Alumno(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacimiento, Carreras carrera, char grupo, int semestre, String nombreUsuario, String contrasena) {
+    public Alumno(String nombre, String apellido, String ciudad, String estado, String curp, String direccion, String numeroControl, String fechaNacimiento, Carreras carrera, int semestre, String nombreUsuario, String contrasena) {
         super(nombre, apellido, ciudad, estado, curp, direccion, numeroControl, fechaNacimiento, carrera, Rol.ALUMNO, nombreUsuario, contrasena);
         this.materias = new ArrayList<>();
         this.semestre = semestre;
@@ -24,16 +24,9 @@ public class Alumno extends Usuario {
         asignarMaterias(carrera, semestre);
     }
 
-    private void asignarMaterias(Carreras carrera, int semestre) {
-        // Aquí puse un try
-        try {
-            String[] materiasSemestre = Sistema.obtenerMaterias(carrera, semestre);
-            for (String nombreMateria : materiasSemestre) {
-                materias.add(new Materia(nombreMateria));
-            }
-        } catch (Exception e) {
-            System.out.println("\nOcurrió un error al asignar materias. Por favor, intente de nuevo.");
-        }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo.charAt(0);
     }
 
     public ArrayList<Materia> getMaterias() {
@@ -89,18 +82,8 @@ public class Alumno extends Usuario {
             String nombreUsuario = datosComun.get(7);
             String contrasena = datosComun.get(8);
             String numeroControl = datosComun.get(9);
-            char grupo;
-            while (true) {
-                System.out.println("Inserte el grupo del Alumno (A/B)");
-                grupo = scanner.nextLine().toUpperCase().charAt(0);
-                if (grupo == 'A' || grupo == 'B') {
-                    break;
-                } else {
-                    System.out.println("Grupo inválido. Por favor, ingrese 'A' o 'B'.");
-                }
-            }
 
-            Alumno alumno = new Alumno(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, grupo, 1, nombreUsuario, contrasena);
+            Alumno alumno = new Alumno(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, 1, nombreUsuario, contrasena);
 
             // Asegúrate de que la lista de alumnos para la carrera actual no sea null
             if (!Sistema.usuarios.containsKey(Sistema.carrera)) {
@@ -113,6 +96,8 @@ public class Alumno extends Usuario {
             // Agrega el alumno a la lista correspondiente
             alumno.asignarMaterias(Sistema.carrera, 1);
             Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO).add(alumno);
+            String grupo = Semestre.anadirAlumno(alumno);
+            alumno.setGrupo(grupo);
 
             System.out.println("Alumno registrado exitosamente.");
         } catch (Exception e) {

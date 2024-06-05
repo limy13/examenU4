@@ -27,7 +27,7 @@ public class Carrera {
         this.fechaCreacion = fechaCreacion;
         this.coordinador = coordinador;
         this.abreviacion = abreviacion;
-        anadirSemestre();
+        //anadirSemestre();
     }
 
     Semestre procesoPrimeraVezSemestre(){
@@ -42,40 +42,40 @@ public class Carrera {
         return semestre;
     }
 
-    void anadirSemestre(){
-        semestres.add(procesoPrimeraVezSemestre());
-    }
-
-    Semestre anadirAlumnosReprobadosAGrupoCorrespondiente(Semestre semestreNuevo){
-        for (Semestre semestre : semestres) {
-            ArrayList<Alumno> vacio = new ArrayList<>();
-            for (int i = 0; i < semestre.getGrupos().size(); i++) {
-                semestreNuevo.getGrupos().get(i).setAlumnos(semestre.getGrupos().get(i).getReprobados());
-                semestre.getGrupos().get(i).setReprobados(vacio);
-            }
-        }
-        return semestreNuevo;
-    }
-
-    void subirDeGradoSemestres(){
-        for(Semestre semestre : semestres){
-            semestre.setNumeroDeSemestre(semestre.getNumeroDeSemestre() + 1);
-            for (Grupo grupo : semestre.getGrupos()) {
-                for (int j = 0; j < grupo.getNumeroAlumnos(); j++) {
-                    if (grupo.estaReprobadoElAlumno(grupo.getAlumnos().get(j))) {
-                        grupo.anadirReprobado(grupo.getAlumnos().get(j));
-                        grupo.getAlumnos().remove(grupo.getAlumnos().get(j));
-                    }
-                }
-            }
-        }
-    }
-
-    String mostrarSemestres(Semestre semestre){
-        String enunciado = "";
-        if(semestre != null){
-            enunciado = "\nSemestre" + semestre.getNumeroDeSemestre();
-        }
-        return enunciado;
-    }
+//    void anadirSemestre(){
+//        semestres.add(procesoPrimeraVezSemestre());
+//    }
+//
+//    Semestre anadirAlumnosReprobadosAGrupoCorrespondiente(Semestre semestreNuevo){
+//        for (Semestre semestre : semestres) {
+//            ArrayList<Alumno> vacio = new ArrayList<>();
+//            for (int i = 0; i < semestre.getGrupos().size(); i++) {
+//                semestreNuevo.getGrupos().get(i).setAlumnos(semestre.getGrupos().get(i).getReprobados());
+//                semestre.getGrupos().get(i).setReprobados(vacio);
+//            }
+//        }
+//        return semestreNuevo;
+//    }
+//
+//    void subirDeGradoSemestres(){
+//        for(Semestre semestre : semestres){
+//            semestre.setNumeroDeSemestre(semestre.getNumeroDeSemestre() + 1);
+//            for (Grupo grupo : semestre.getGrupos()) {
+//                for (int j = 0; j < grupo.getNumeroAlumnos(); j++) {
+//                    if (grupo.estaReprobadoElAlumno(grupo.getAlumnos().get(j))) {
+//                        grupo.anadirReprobado(grupo.getAlumnos().get(j));
+//                        grupo.getAlumnos().remove(grupo.getAlumnos().get(j));
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    String mostrarSemestres(Semestre semestre){
+//        String enunciado = "";
+//        if(semestre != null){
+//            enunciado = "\nSemestre" + semestre.getNumeroDeSemestre();
+//        }
+//        return enunciado;
+//    }
 }
