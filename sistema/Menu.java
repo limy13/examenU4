@@ -81,7 +81,7 @@ public class Menu {
         do {
             System.out.println("\n**");
             System.out.println("\n---- BIENVENIDO COORDINADOR ----\n");
-            System.out.println("Usuarios.Usuario: " + usuario.getNombreUsuario());
+            System.out.println("Usuario: " + usuario.getNombreUsuario());
             System.out.println("\n1. Mostrar registro de alumnos graduados");
             System.out.println("2. Alumnos");
             System.out.println("3. Calificaciones");
@@ -95,7 +95,7 @@ public class Menu {
             switch (decision) {
                 //Ver info Personal
                 case "1":
-                    //Mostrar alumnos graduados
+                    Sistema.imprimirGraduados();
                     break;
                 case "2":
                     String decisionAlumno;
@@ -105,7 +105,7 @@ public class Menu {
                         System.out.println("2. Consultar alumno");
                         System.out.println("3. Modificar datos de alumno");
                         System.out.println("4. Eliminar alumno");
-                        System.out.println("5. Regresar al menú de Usuarios.Coordinador");
+                        System.out.println("5. Regresar al menú de Coordinador");
                         System.out.print("\nIngrese opción: ");
                         decisionAlumno = scanner.nextLine();
 
@@ -154,11 +154,11 @@ public class Menu {
                     String decisionProfesor;
                     do {
                         System.out.println("\n---- MENÚ DE PROFESORES ----\n");
-                        System.out.println("1. Registrar Usuarios.Profesor");
+                        System.out.println("1. Registrar Profesor");
                         System.out.println("2. Consultar Profesores");
-                        System.out.println("3. Modificar datos de un Usuarios.Profesor");
-                        System.out.println("4. Eliminar Usuarios.Profesor");
-                        System.out.println("5. Regresar al menú de Usuarios.Coordinador");
+                        System.out.println("3. Modificar datos de un Profesor");
+                        System.out.println("4. Eliminar Profesor");
+                        System.out.println("5. Regresar al menú de Coordinador");
                         System.out.print("\nIngrese opción: ");
                         decisionProfesor = scanner.nextLine();
 

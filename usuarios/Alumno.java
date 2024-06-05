@@ -89,7 +89,7 @@ public class Alumno extends Usuario {
             String contrasena = datosComun.get(8);
             String numeroControl = datosComun.get(9);
             System.out.println("Inserte el grupo del Alumno (A/B)");
-            char grupo = Usuario.validarGrupo();
+            char grupo = scanner.nextLine().charAt(0);
 
             Alumno alumno = new Alumno(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, grupo,1, nombreUsuario, contrasena);
 
@@ -102,11 +102,15 @@ public class Alumno extends Usuario {
             }
 
             // Agrega el alumno a la lista correspondiente
+            alumno.asignarMaterias(Sistema.carrera, 1);
+            Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO).add(alumno);
+
             Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO).add(alumno);
         } catch (Exception e) {
             System.out.println("\nOcurrió un error al registrar al alumno. Por favor, intente de nuevo.");
         }
     }
+
 
     public static void modificarAlumno() {
         boolean band = false;
