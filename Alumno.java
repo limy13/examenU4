@@ -26,7 +26,7 @@ public class Alumno extends Usuario {
                 materias.add(new Materia(nombreMateria));
             }
         } catch (Exception e) {
-            System.out.println("Ocurrió un error al asignar materias. Por favor, intente de nuevo.");
+            System.out.println("\nOcurrió un error al asignar materias. Por favor, intente de nuevo.");
         }
     }
 
@@ -99,7 +99,7 @@ public class Alumno extends Usuario {
             // Agrega el alumno a la lista correspondiente
             Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO).add(alumno);
         } catch (Exception e) {
-            System.out.println("Ocurrió un error al registrar al alumno. Por favor, intente de nuevo.");
+            System.out.println("\nOcurrió un error al registrar al alumno. Por favor, intente de nuevo.");
         }
     }
 
@@ -150,7 +150,7 @@ public class Alumno extends Usuario {
                 System.out.println("\nEste número de control no pertenece a ningún alumno");
             }
         } catch (Exception e) {
-            System.out.println("Ocurrió un error al modificar al alumno. Por favor, intente de nuevo.");
+            System.out.println("\nOcurrió un error al modificar al alumno. Por favor, intente de nuevo.");
         }
     }
 
@@ -176,7 +176,7 @@ public class Alumno extends Usuario {
                 System.out.println("\nNo se encontró ningún alumno con el número de control ingresado.");
             }
         } catch (Exception e) {
-            System.out.println("Ocurrió un error al eliminar al alumno. Por favor, intente de nuevo.");
+            System.out.println("\nOcurrió un error al eliminar al alumno. Por favor, intente de nuevo.");
         }
     }
 

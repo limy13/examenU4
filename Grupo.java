@@ -14,12 +14,12 @@ public class Grupo {
         if (alumnos.size() < 3){
             for (int i = 0; i < 3; i++){
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Registro de alumno " + (i+1));
+                System.out.println("\nRegistro de alumno " + (i+1));
                 Alumno.registrarAlumno(); // Llama al método estático registrarAlumno de la clase Alumno
             }
         }else if (alumnos.size() < 20){
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Registro de nuevo alumno");
+            System.out.println("\nRegistro de nuevo alumno");
             Alumno.registrarAlumno(); // Llama al método estático registrarAlumno de la clase Alumno
         }
     }

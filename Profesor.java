@@ -66,7 +66,7 @@ public class Profesor extends Usuario {
 
             Sistema.usuarios.get(Sistema.carrera).get(Rol.PROFESOR).add(profesor);
         } catch (Exception e) {
-            System.out.println("Ocurrió un error al registrar al profesor. Por favor, intente de nuevo.");
+            System.out.println("\nOcurrió un error al registrar al profesor. Por favor, intente de nuevo.");
         }
     }
 
@@ -79,7 +79,7 @@ public class Profesor extends Usuario {
             System.out.println("Sueldo: " + this.sueldo);
             System.out.println("Materias que imparte: " + String.join(", ", this.materiasImparte));
         } catch (Exception e) {
-            System.out.println("Ocurrió un error al mostrar la información personal del profesor. Por favor, intente de nuevo.");
+            System.out.println("\nOcurrió un error al mostrar la información personal del profesor. Por favor, intente de nuevo.");
         }
     }
 
@@ -99,7 +99,7 @@ public class Profesor extends Usuario {
             return rfc = ("" + apellido.charAt(0) + apellido.charAt(1) + partesApellido[1].charAt(0) + nombre.charAt(0) +
                     partesNacimiento[0].charAt(2) + partesNacimiento[0].charAt(3) + partesNacimiento[1] + partesNacimiento[2] + homoclave).toUpperCase();
         } catch (Exception e) {
-            System.out.println("Ocurrió un error al generar el RFC. Por favor, intente de nuevo.");
+            System.out.println("\nOcurrió un error al generar el RFC. Por favor, intente de nuevo.");
             return null;
         }
     }
@@ -159,7 +159,7 @@ public class Profesor extends Usuario {
                 System.out.println("\nEste número de control no pertenece a ningún profesor");
             }
         } catch (Exception e) {
-            System.out.println("Ocurrió un error al modificar al profesor. Por favor, intente de nuevo.");
+            System.out.println("\nOcurrió un error al modificar al profesor. Por favor, intente de nuevo.");
         }
     }
 
@@ -171,14 +171,14 @@ public class Profesor extends Usuario {
             System.out.println("Sueldo: " + this.sueldo);
             System.out.println("Materias que imparte: " + String.join(", ", this.materiasImparte));
         } catch (Exception e) {
-            System.out.println("Ocurrió un error al mostrar la información del profesor. Por favor, intente de nuevo.");
+            System.out.println("\nOcurrió un error al mostrar la información del profesor. Por favor, intente de nuevo.");
         }
     }
 
     public static void eliminarProfesor() {
         try {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("\n---- Eliminar Profesor ----");
+            System.out.println("\n---- Eliminar Profesor ----\n");
             System.out.print("Ingrese el número de control del profesor que desea eliminar: ");
             String numero = scanner.nextLine();
 
@@ -197,7 +197,7 @@ public class Profesor extends Usuario {
                 System.out.println("\nNo se encontró ningún alumno con el número de control ingresado");
             }
         } catch (Exception e) {
-            System.out.println("Ocurrió un error al eliminar al alumno. Por favor, intente de nuevo");
+            System.out.println("\nOcurrió un error al eliminar al alumno. Por favor, intente de nuevo");
         }
     }
 
@@ -210,23 +210,23 @@ public class Profesor extends Usuario {
 
             // Verificar si la materia ya tiene calificación asignada
             if (materia.getCalificacion() != -1) {
-                System.out.println("La materia " + materiaNombre + " ya tiene una calificación asignada.");
+                System.out.println("\nLa materia " + materiaNombre + " ya tiene una calificación asignada.");
                 continue; // Saltar a la siguiente materia
             }
 
             // Solicitar calificación para la materia
             double calificacion;
             do {
-                System.out.print("Ingrese la calificación para la materia " + materiaNombre + " del estudiante " + alumno.getNombre() + ": ");
+                System.out.print("\nIngrese la calificación para la materia " + materiaNombre + " del estudiante " + alumno.getNombre() + ": ");
                 while (!scanner.hasNextDouble()) {
-                    System.out.println("Error: la calificación debe ser un número decimal.");
+                    System.out.println("\nError: la calificación debe ser un número decimal.");
                     scanner.next(); // Descartar la entrada no válida
                 }
                 calificacion = scanner.nextDouble();
             } while (calificacion < 0 || calificacion > 100);
 
             materia.setCalificacion(calificacion);
-            System.out.println("Calificación asignada correctamente para la materia " + materiaNombre);
+            System.out.println("\nCalificación asignada correctamente para la materia " + materiaNombre);
 
             // Almacenar la calificación (opcional)
             // ...

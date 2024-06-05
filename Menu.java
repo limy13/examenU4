@@ -106,7 +106,7 @@ public class Menu {
                                 Alumno.registrarAlumno();
                                 break;
                             case "2":
-                                System.out.println("Ingrese el semestre del que quiera ver los alumnos");
+                                System.out.println("\nIngrese el semestre del que quiera ver los alumnos");
                                 String sem = scanner.nextLine();
                                 switch (sem){
                                     case "1":
@@ -119,7 +119,7 @@ public class Menu {
                                         verListaAlumnosPorSemestre(3);
                                         break;
                                     default:
-                                        System.out.println("Ingrese una opcion valida");
+                                        System.out.println("\nIngrese una opcion valida");
                                         break;
                                 }
                                 break;
@@ -130,10 +130,10 @@ public class Menu {
                                 Alumno.eliminarAlumno();
                                 break;
                             case "5":
-                                System.out.println("Regresando al menú principal");
+                                System.out.println("\nRegresando al menú principal");
                                 break;
                             default:
-                                System.out.println("Elige una opción Valida");
+                                System.out.println("\nElige una opción Valida");
                                 break;
                         }
                     } while (!decisionAlumno.equals("5"));
@@ -170,10 +170,10 @@ public class Menu {
                                 Profesor.eliminarProfesor();
                                 break;
                             case "5":
-                                System.out.println("Regresando al menú principal");
+                                System.out.println("\nRegresando al menú principal");
                                 break;
                             default:
-                                System.out.println("Elige una opción Valida");
+                                System.out.println("\nElige una opción Valida");
                                 break;
                         }
                     } while (!decisionProfesor.equals("5"));
@@ -184,10 +184,10 @@ public class Menu {
                     ((Coordinador) usuario).verInformacionCoordinador();
                     break;
                 case "7":
-                    System.out.println("Cerrando Sesion");
+                    System.out.println("\nCerrando Sesion");
                     break;
                 default:
-                    System.out.println("Elige una opción Valida");
+                    System.out.println("\nElige una opción Valida");
                     break;
             }
         } while (!decision.equals("7"));
@@ -217,10 +217,10 @@ public class Menu {
                     ((Alumno) usuario).verInformacionPersonal();
                     break;
                 case "4":
-                    System.out.println("Cerrando Sesion");
+                    System.out.println("\nCerrando Sesion");
                     break;
                 default:
-                    System.out.println("Elige una opción Valida");
+                    System.out.println("\nElige una opción Valida");
                     break;
             }
         } while (!decision.equals("4"));
@@ -253,10 +253,10 @@ public class Menu {
                     ((Profesor) usuario).verInformacionProfesor();
                     break;
                 case "5":
-                    System.out.println("Cerrando Sesion");
+                    System.out.println("\nCerrando Sesion");
                     break;
                 default:
-                    System.out.println("Elige una opción Valida");
+                    System.out.println("\nElige una opción Valida");
                     break;
             }
         } while (!decision.equals("5"));
@@ -265,7 +265,7 @@ public class Menu {
     public void menuCalificaciones() {
         String dc;
         do {
-            System.out.println("QUE DESEA HACER?");
+            System.out.println("QUE DESEA HACER?\n");
             System.out.println("1. Registrar Calificaciones");
             System.out.println("2. Consultar Calificaciones");
             System.out.println("3. Modificar Calificaciones");
@@ -283,10 +283,10 @@ public class Menu {
                     //Modificar Calificaciones
                     break;
                 case "4":
-                    System.out.println("Saliendo del Programa");
+                    System.out.println("\nSaliendo del Programa");
                     break;
                 default:
-                    System.out.println("Elige una opción Valida");
+                    System.out.println("\nElige una opción Valida");
                     break;
             }
         } while (!dc.equals("4"));
@@ -308,7 +308,7 @@ public class Menu {
                 alumno.verInformacionPersonal();
             }
         } else {
-            System.out.println("No hay alumnos inscritos en el semestre especificado.");
+            System.out.println("\nNo hay alumnos inscritos en el semestre especificado.");
         }
     }
 }

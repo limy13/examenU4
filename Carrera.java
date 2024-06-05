@@ -28,12 +28,12 @@ public class Carrera {
 
     Semestre procesoPrimeraVezSemestre(){
         Semestre semestre = new Semestre();
-        System.out.println("** SE CREÓ UN NUEVO PRIMER SEMESTRE **");
-        System.out.println("Se creó el grupo A de el semestre 1 de la carrera " + this.nombreCarrera +": ");
+        System.out.println("\n** SE CREÓ UN NUEVO PRIMER SEMESTRE **");
+        System.out.println("\nSe creó el grupo A de el semestre 1 de la carrera " + this.nombreCarrera +": ");
         for (int i = 0; i < semestres.size(); i++) {
 
         }
-        System.out.println("Para que el grupo pueda se requieren 3 alumnos, se crean a continuacion:");
+        System.out.println("\nPara que el grupo pueda se requieren 3 alumnos, se crean a continuacion:");
 
         return semestre;
     }
@@ -70,7 +70,7 @@ public class Carrera {
     String mostrarSemestres(Semestre semestre){
         String enunciado = "";
         if(semestre != null){
-            enunciado = "Semestre" + semestre.getNumeroDeSemestre();
+            enunciado = "\nSemestre" + semestre.getNumeroDeSemestre();
         }
         return enunciado;
     }

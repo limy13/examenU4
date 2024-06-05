@@ -267,7 +267,7 @@ public class Usuario {
     }
 
     public void verInformacionPersonal() {
-        System.out.println("---- Información Personal ----");
+        System.out.println("\n---- Información Personal ----\n");
         System.out.println("Nombre completo: " + this.nombre + " " + this.apellido);
         System.out.println("Fecha de nacimiento: " + this.fechaNacimiento);
         System.out.println("Ciudad: " + this.ciudad);
@@ -318,7 +318,7 @@ public class Usuario {
         String estadoUpper = estado.toUpperCase();
 
         while (!estados.containsKey(estadoUpper)) {
-            System.out.println("El estado ingresado no es válido. Por favor, ingresa un estado de México.");
+            System.out.println("\nEl estado ingresado no es válido. Por favor, ingresa un estado de México.");
             System.out.print("Ingresa un Estado válido: ");
             estado = scanner.nextLine().toUpperCase();
             estadoUpper = estado.toUpperCase();

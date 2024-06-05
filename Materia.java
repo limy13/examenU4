@@ -27,18 +27,18 @@ public class Materia {
         if (calificacion >= 0 && calificacion <= 100) {
             this.calificacion = calificacion;
         } else {
-            System.out.println("Calificación inválida. Debe estar entre 0 y 100.");
+            System.out.println("\nCalificación inválida. Debe estar entre 0 y 100.");
         }
     }
 
     public void mostrarCalificacionesAlumno(Alumno alumno) {
         if (calificaciones.containsKey(alumno)) {
-            System.out.println("Calificaciones de " + alumno.getNombre() + " para la materia " + this.nombre + ":");
+            System.out.println("\nCalificaciones de " + alumno.getNombre() + " para la materia " + this.nombre + ":");
             for (Map.Entry<Alumno, Double> entry : calificaciones.entrySet()) {
                 System.out.println(" - " + entry.getValue());
             }
         } else {
-            System.out.println("El alumno " + alumno.getNombre() + " no tiene calificación para la materia " + this.nombre);
+            System.out.println("\nEl alumno " + alumno.getNombre() + " no tiene calificación para la materia " + this.nombre);
         }
     }
 }

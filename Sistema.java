@@ -82,16 +82,16 @@ public class Sistema {
 
             // Verificar si la materia ya tiene calificación asignada para el alumno
             if (materia.getCalificacion() != -1) {
-                System.out.println("La materia " + materiaNombre + " ya tiene una calificación asignada.");
+                System.out.println("\nLa materia " + materiaNombre + " ya tiene una calificación asignada.");
                 continue; // Saltar a la siguiente materia
             }
 
             // Solicitar calificación para la materia
             double calificacion;
             do {
-                System.out.print("Ingrese la calificación para la materia " + materiaNombre + " del estudiante " + alumno.getNombre() + ": ");
+                System.out.print("\nIngrese la calificación para la materia " + materiaNombre + " del estudiante " + alumno.getNombre() + ": ");
                 while (!scanner.hasNextDouble()) {
-                    System.out.println("Error: la calificación debe ser un número decimal.");
+                    System.out.println("\nError: la calificación debe ser un número decimal.");
                     scanner.next(); // Descartar la entrada no válida
                 }
                 calificacion = scanner.nextDouble();
@@ -99,14 +99,14 @@ public class Sistema {
 
             materia.setCalificacion(calificacion);
             calificacionesAsignadas++;
-            System.out.println("Calificación asignada correctamente para la materia " + materiaNombre);
+            System.out.println("\nCalificación asignada correctamente para la materia " + materiaNombre);
 
             // Almacenar la calificación específica del alumno en el mapa de calificaciones de la materia
             materia.getCalificaciones().put(alumno, calificacion);
         }
 
         scanner.close();
-        System.out.println("Total de calificaciones asignadas: " + calificacionesAsignadas);
+        System.out.println("\nTotal de calificaciones asignadas: " + calificacionesAsignadas);
     }
 
 //    public static void guardarEnJSON() {

@@ -54,10 +54,10 @@ public class Coordinador extends Usuario {
                     profesor.verInformacionPersonal();
                 }
             } else {
-                System.out.println("No hay profesores asignados a esta carrera.");
+                System.out.println("\nNo hay profesores asignados a esta carrera.");
             }
         } catch (Exception e) {
-            System.out.println("Ocurrió un error al mostrar la lista de profesores por carrera. Por favor, intente de nuevo.");
+            System.out.println("\nOcurrió un error al mostrar la lista de profesores por carrera. Por favor, intente de nuevo.");
         }
     }
 
@@ -70,23 +70,23 @@ public class Coordinador extends Usuario {
 
             // Verificar si la materia ya tiene calificación asignada
             if (materia.getCalificacion() != -1) {
-                System.out.println("La materia " + materiaNombre + " ya tiene una calificación asignada.");
+                System.out.println("\nLa materia " + materiaNombre + " ya tiene una calificación asignada.");
                 continue; // Saltar a la siguiente materia
             }
 
             // Solicitar calificación para la materia
             double calificacion;
             do {
-                System.out.print("Ingrese la calificación para la materia " + materiaNombre + " del estudiante " + alumno.getNombre() + ": ");
+                System.out.print("\nIngrese la calificación para la materia " + materiaNombre + " del estudiante " + alumno.getNombre() + ": ");
                 while (!scanner.hasNextDouble()) {
-                    System.out.println("Error: la calificación debe ser un número decimal.");
+                    System.out.println("\nError: la calificación debe ser un número decimal.");
                     scanner.next(); // Descartar la entrada no válida
                 }
                 calificacion = scanner.nextDouble();
             } while (calificacion < 0 || calificacion > 100);
 
             materia.setCalificacion(calificacion);
-            System.out.println("Calificación asignada correctamente para la materia " + materiaNombre);
+            System.out.println("\nCalificación asignada correctamente para la materia " + materiaNombre);
 
             // Almacenar la calificación (opcional)
             // ...
