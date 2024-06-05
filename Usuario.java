@@ -46,7 +46,9 @@ public class Usuario {
         this.curp = curp;
     }
 
-    public String getApellido() {return apellido;}
+    public String getApellido() {
+        return apellido;
+    }
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
@@ -88,8 +90,8 @@ public class Usuario {
         return rol;
     }
 
-    public static ArrayList datosComun(Rol rol) {
-        ArrayList<String> datosComun = new ArrayList<String>();
+    public static ArrayList<String> datosComun(Rol rol) {
+        ArrayList<String> datosComun = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         String rolUsuario = rol == Rol.ALUMNO ? "Alumno" : rol == Rol.PROFESOR ? "Profesor" : "Coordinador";
 
@@ -101,7 +103,7 @@ public class Usuario {
         String apellidoP = scanner.nextLine();
         System.out.print("Apellido materno: ");
         String apellidoM = scanner.nextLine();
-        String fechaNacimiento = validarFecha(); // Método para validar fecha
+        String fechaNacimiento = validarFecha();
         System.out.print("Género (H/M): ");
         String genero = scanner.nextLine().toUpperCase();
         System.out.print("Estado: ");
@@ -115,7 +117,8 @@ public class Usuario {
         System.out.print("Contraseña: ");
         String contrasena = scanner.nextLine();
 
-        String curp = generarCurp(nombre, apellidoP, apellidoM, fechaNacimiento, genero, estado);
+        String estadoAbrev = obtenerAbreviaturaEstado(estado);
+        String curp = generarCurp(nombre, apellidoP, apellidoM, fechaNacimiento, genero, estadoAbrev);
 
         datosComun.addAll(Arrays.asList(nombre, apellidoP.concat(" ").concat(apellidoM), fechaNacimiento, estado, ciudad, direccion, curp.toUpperCase(), nombreUsuario, contrasena, numeroControl));
         return datosComun;
@@ -129,10 +132,10 @@ public class Usuario {
             System.out.print("Ingresa el nombre de usuario: ");
             nombreUsuario = scanner.nextLine();
             nombreUsuarioExistente = false;
-            for(Map<Rol, ArrayList<Usuario>> usuariosList : Sistema.usuarios.values()) {
-                for(ArrayList<Usuario> usuarios : usuariosList.values()) {
-                    for(Usuario usuario : usuarios) {
-                        if(usuario.getNombreUsuario().equals(nombreUsuario)) {
+            for (Map<Rol, ArrayList<Usuario>> usuariosList : Sistema.usuarios.values()) {
+                for (ArrayList<Usuario> usuarios : usuariosList.values()) {
+                    for (Usuario usuario : usuarios) {
+                        if (usuario.getNombreUsuario().equals(nombreUsuario)) {
                             nombreUsuarioExistente = true;
                             System.out.println("\nEste nombre de usuario ya ha sido registrado, por favor ingrese uno diferente");
                             break;
@@ -140,25 +143,21 @@ public class Usuario {
                     }
                 }
             }
-        }
-        while (nombreUsuarioExistente);
+        } while (nombreUsuarioExistente);
         return nombreUsuario;
     }
 
     public static String generarNumeroControl(char letraNombre, Rol rol) {
-
-        //este metodo genera el numero de control para cualquier profe, alumno, coordinador
-
         boolean band = false;
         String numeroControl = "";
-        String caracter = rol == Rol.ALUMNO ? "l" : rol == Rol.PROFESOR ? "M" : "C";
+        String caracter = rol == Rol.ALUMNO ? "L" : rol == Rol.PROFESOR ? "M" : "C";
         String siglasCarrera = Sistema.carrera == Carreras.ISC ? "ISC" : Sistema.carrera == Carreras.IMAT ? "IMAT" : "ELC";
 
         numeroControl = numeroControl + caracter + letraNombre + "24" + siglasCarrera;
 
-        for(Usuario usuario : Sistema.usuarios.get(Sistema.carrera).get(rol)) {
-            String [] numeroPartes = usuario.getNumeroControl().split("-");
-            if(numeroPartes[0].equals(numeroControl)) {
+        for (Usuario usuario : Sistema.usuarios.get(Sistema.carrera).get(rol)) {
+            String[] numeroPartes = usuario.getNumeroControl().split("-");
+            if (numeroPartes[0].equals(numeroControl)) {
                 int numero = Integer.parseInt(numeroPartes[1]) + 1;
                 numeroControl = numeroControl + "-" + numero;
                 band = true;
@@ -166,12 +165,11 @@ public class Usuario {
             }
         }
 
-        if(!band) {
+        if (!band) {
             numeroControl = numeroControl + "-" + 0;
         }
         return numeroControl;
     }
-
 
     public static String obtenerPrimeraVocal(String apellido) {
         String apellidoUpper = apellido.toUpperCase();
@@ -184,14 +182,13 @@ public class Usuario {
         return "X";
     }
 
-
     public static String validarFecha() {
         Scanner scanner = new Scanner(System.in);
         boolean fechaValida = false;
         String fechaIngresada = "";
 
         while (!fechaValida) {
-            System.out.print("Ingresa una fecha con formato yyyy-MM-dd:");
+            System.out.print("Ingresa una fecha con formato yyyy-MM-dd: ");
             fechaIngresada = scanner.nextLine();
 
             String[] partesFecha = fechaIngresada.split("-");
@@ -199,75 +196,57 @@ public class Usuario {
             int mes = Integer.parseInt(partesFecha[1]);
             int dia = Integer.parseInt(partesFecha[2]);
 
-
-            // si ano es == a el actual hacer esto
-            if (año == LocalDate.now().getYear()){
-                if (mes >= 1 && mes <= 12 && mes <= LocalDate.now().getMonthValue() ) {
-                    // Validar el día
+            // si año es == a el actual hacer esto
+            if (año == LocalDate.now().getYear()) {
+                if (mes >= 1 && mes <= 12 && mes <= LocalDate.now().getMonthValue()) {
+                    // Validar el dia
                     if (dia >= 1 && dia <= obtenerDiasEnMes(mes)) {
                         fechaValida = true;
                     } else {
-                        System.out.println("\nError: El día ingresado no corresponde al mes especificado.");
+                        System.out.println("\nError: El dia ingresado no corresponde al mes especificado.");
                     }
                 } else {
-                    System.out.println("\nError: El mes ingresado no es válido.");
+                    System.out.println("\nError: El mes ingresado no es valido.");
                 }
-
             }
 
-
-
-
-
-
             // Verificar que el año no sea futuro pero tampoco presente
-            if (año < LocalDate.now().getYear() && año > 1907 ) {
+            if (año < LocalDate.now().getYear() && año > 1907) {
                 // Validar el mes
-
-                if (mes >= 1 && mes <= 12  ) {
-                    // Validar el día
+                if (mes >= 1 && mes <= 12) {
+                    // Validar el dia
                     if (dia >= 1 && dia <= obtenerDiasEnMes(mes)) {
                         fechaValida = true;
                     } else {
-                        System.out.println("\nError: El día ingresado no corresponde al mes especificado.");
+                        System.out.println("\nError: El dia ingresado no corresponde al mes especificado.");
                     }
                 } else {
-                    System.out.println("\nError: El mes ingresado no es válido.");
+                    System.out.println("\nError: El mes ingresado no es valido.");
                 }
             } else {
                 System.out.println("\nError: El año ingresado no puede ser un año futuro o muy muy viejo.");
-            }//fin if
-        }//while
+            }
+        }
 
         return fechaIngresada;
-    }//metodovalidar
-
+    }
 
     public static int obtenerDiasEnMes(int mes) {
         switch (mes) {
             case 2:
                 return 28;
-
             case 4:
-                return 30; // Abril, junio, septiembre y noviembre tienen 30 días
-
             case 6:
-                return 30;
-
             case 9:
-                return 30;
-
             case 11:
-                return 30;
-
-
+                return 30; // Abril, junio, septiembre y noviembre tienen 30 dias
             default:
-                return 31; // Los demás meses tienen 31 días
+                return 31; // Los demas meses tienen 31 dias
         }
     }
 
     public void verInformacionPersonal() {
-        System.out.println("\n---- Información Personal ----\n");
+        System.out.println("---- Información Personal ----");
         System.out.println("Nombre completo: " + this.nombre + " " + this.apellido);
         System.out.println("Fecha de nacimiento: " + this.fechaNacimiento);
         System.out.println("Ciudad: " + this.ciudad);
@@ -279,56 +258,68 @@ public class Usuario {
         System.out.println("Carrera: " + this.carrera);
     }
 
+    private static final List<String> ESTADOS_MEXICO = Arrays.asList(
+            "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua", "Ciudad de Mexico",
+            "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Mexico", "Michoacan",
+            "Morelos", "Nayarit", "Nuevo Leon", "Oaxaca", "Puebla", "Queretaro", "Quintana Roo", "San Luis Potosi",
+            "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatan", "Zacatecas"
+    );
+
+    private static final Map<String, String> ESTADOS_ABREVIATURAS = new HashMap<String, String>() {{
+        put("Aguascalientes", "AS");
+        put("Baja California", "BC");
+        put("Baja California Sur", "BS");
+        put("Campeche", "CC");
+        put("Chiapas", "CS");
+        put("Chihuahua", "CH");
+        put("Ciudad de Mexico", "DF");
+        put("Coahuila", "CL");
+        put("Colima", "CM");
+        put("Durango", "DG");
+        put("Guanajuato", "GT");
+        put("Guerrero", "GR");
+        put("Hidalgo", "HG");
+        put("Jalisco", "JC");
+        put("Mexico", "MC");
+        put("Michoacan", "MN");
+        put("Morelos", "MS");
+        put("Nayarit", "NT");
+        put("Nuevo Leon", "NL");
+        put("Oaxaca", "OC");
+        put("Puebla", "PL");
+        put("Queretaro", "QT");
+        put("Quintana Roo", "QR");
+        put("San Luis Potosi", "SP");
+        put("Sinaloa", "SL");
+        put("Sonora", "SR");
+        put("Tabasco", "TC");
+        put("Tamaulipas", "TS");
+        put("Tlaxcala", "TL");
+        put("Veracruz", "VZ");
+        put("Yucatan", "YN");
+        put("Zacatecas", "ZS");
+    }};
+
     public static String validarEstado(String estado) {
-        Map<String, String> estados = new HashMap<>();
-        estados.put("AS", "Aguascalientes");
-        estados.put("BC", "Baja California");
-        estados.put("BS", "Baja California Sur");
-        estados.put("CC", "Campeche");
-        estados.put("CL", "Coahuila de Zaragoza");
-        estados.put("CM", "Colima");
-        estados.put("CS", "Chiapas");
-        estados.put("CH", "Chihuahua");
-        estados.put("DF", "Ciudad de México");
-        estados.put("DG", "Durango");
-        estados.put("GT", "Guanajuato");
-        estados.put("GR", "Guerrero");
-        estados.put("HG", "Hidalgo");
-        estados.put("JC", "Jalisco");
-        estados.put("MC", "México");
-        estados.put("MN", "Michoacán de Ocampo");
-        estados.put("MS", "Morelos");
-        estados.put("NT", "Nayarit");
-        estados.put("NL", "Nuevo León");
-        estados.put("OC", "Oaxaca");
-        estados.put("PL", "Puebla");
-        estados.put("QT", "Querétaro");
-        estados.put("QR", "Quintana Roo");
-        estados.put("SP", "San Luis Potosí");
-        estados.put("SL", "Sinaloa");
-        estados.put("SR", "Sonora");
-        estados.put("TC", "Tabasco");
-        estados.put("TS", "Tamaulipas");
-        estados.put("TL", "Tlaxcala");
-        estados.put("VZ", "Veracruz");
-        estados.put("YN", "Yucatán");
-        estados.put("ZS", "Zacatecas");
-
         Scanner scanner = new Scanner(System.in);
-        String estadoUpper = estado.toUpperCase();
-
-        while (!estados.containsKey(estadoUpper)) {
-            System.out.println("\nEl estado ingresado no es válido. Por favor, ingresa un estado de México.");
-            System.out.print("Ingresa un Estado válido: ");
-            estado = scanner.nextLine().toUpperCase();
-            estadoUpper = estado.toUpperCase();
+        estado = estado.toLowerCase();
+        List<String> estadosNormalizados = new ArrayList<>();
+        for (String estadoValido : ESTADOS_MEXICO) {
+            estadosNormalizados.add(estadoValido.toLowerCase());
         }
-
-
-        return estadoUpper; // Retornamos la clave del estado en lugar del nombre completo
+        while (!estadosNormalizados.contains(estado)) {
+            System.out.println("Estado no valido. Por favor, ingresa un estado valido en Mexico: ");
+            estado = scanner.nextLine().toLowerCase();
+        }
+        int index = estadosNormalizados.indexOf(estado);
+        return ESTADOS_MEXICO.get(index);
     }
 
-    public static String generarCurp(String nombre, String apellidoP, String apellidoM, String fechaNacimiento, String genero, String estado) {
+    public static String obtenerAbreviaturaEstado(String estado) {
+        return ESTADOS_ABREVIATURAS.getOrDefault(estado, "XX");
+    }
+
+    public static String generarCurp(String nombre, String apellidoP, String apellidoM, String fechaNacimiento, String genero, String estadoAbrev) {
         String primerLetraApellidoP = apellidoP.substring(0, 1).toUpperCase();
         String primeraVocalApellidoP = obtenerPrimeraVocal(apellidoP);
         String primerLetraApellidoM = apellidoM.substring(0, 1).toUpperCase();
@@ -338,17 +329,16 @@ public class Usuario {
         String mes = fecha[1];
         String dia = fecha[2];
 
-        String curp = primerLetraApellidoP + primeraVocalApellidoP + primerLetraApellidoM + primerLetraNombre + año + mes + dia + genero + estado;
+        String curp = primerLetraApellidoP + primeraVocalApellidoP + primerLetraApellidoM + primerLetraNombre + año + mes + dia + genero + estadoAbrev;
 
         Random random = new Random();
         String homoclave = "";
         for (int i = 0; i < 3; i++) {
-            char caracter = "abcdefghijklmnopqrstuvwxyz0123456789".charAt(random.nextInt("abcdefghijklmnopqrstuvwxyz0123456789".length()));
+            char caracter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".charAt(random.nextInt("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".length()));
             homoclave += caracter;
         }
         curp += homoclave;
 
         return curp;
     }
-
 }
