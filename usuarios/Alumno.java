@@ -1,5 +1,4 @@
 package usuarios;
-import usuarios.Usuario;
 import java.util.*;
 import carreras.utils.Carreras;
 import semestres.Materia;
@@ -74,101 +73,6 @@ public class Alumno extends Usuario {
         System.out.println("Promedio: " + this.promedio);
     }
 
-    public static void modificarAlumno() {
-        boolean band = false;
-        // Aquí puse un try
-        try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("\n---- Modificar alumno ----");
-            System.out.print("Ingrese el número de control del alumno que desea modificar: ");
-            String numero = scanner.nextLine();
-            for (Usuario usuario : Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO)) {
-                if (numero.equals(usuario.getNumeroControl())) {
-                    band = true;
-                    System.out.print("\nNombre: ");
-                    String nombre = scanner.nextLine();
-                    usuario.setNombre(nombre);
-                    System.out.print("Apellido paterno: ");
-                    String apellidoP = scanner.nextLine();
-                    System.out.print("Apellido materno: ");
-                    String apellidoM = scanner.nextLine();
-                    usuario.setApellido(apellidoP.concat(" ").concat(apellidoM));
-                    String fechaNacimiento = Usuario.validarFecha(); // Método para validar fecha
-                    usuario.setFechaNacimiento(fechaNacimiento);
-                    System.out.print("Género (H/M): ");
-                    String genero = scanner.nextLine().toUpperCase();
-                    System.out.print("Estado: ");
-                    String estado = Usuario.validarEstado(scanner.nextLine());
-                    usuario.setEstado(estado);
-                    System.out.print("Ciudad: ");
-                    String ciudad = scanner.nextLine();
-                    usuario.setCiudad(ciudad);
-                    System.out.print("Dirección: ");
-                    String direccion = scanner.nextLine();
-                    usuario.setDireccion(direccion);
-                    String nombreUsuario = Usuario.registrarNombreUsuario();
-                    usuario.setNombreUsuario(nombreUsuario);
-                    String numeroControl = Usuario.generarNumeroControl(nombre.charAt(0), Rol.ALUMNO);
-                    usuario.setNumeroControl(numeroControl);
-                    System.out.print("Contraseña: ");
-                    String contrasena = scanner.nextLine();
-                    usuario.setContrasena(contrasena);
-                    String curp = Usuario.generarCurp(nombre, apellidoP, apellidoM, fechaNacimiento, genero, estado);
-                    usuario.setCurp(curp);
-                }
-            }
-            if (!band) {
-                System.out.println("\nEste número de control no pertenece a ningún alumno");
-            }
-        } catch (Exception e) {
-            System.out.println("\nOcurrió un error al modificar al alumno. Por favor, intente de nuevo.");
-        }
-    }
-
-    public static void eliminarAlumno() {
-        try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("\n---- Eliminar alumno ----");
-            System.out.print("Ingrese el número de control del alumno que desea eliminar: ");
-            String numero = scanner.nextLine();
-
-            Alumno alumnoAEliminar = null;
-            for (Usuario usuario : Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO)) {
-                if (numero.equals(usuario.getNumeroControl())) {
-                    alumnoAEliminar = (Alumno) usuario;
-                    break;
-                }
-            }
-
-            if (alumnoAEliminar != null) {
-                Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO).remove(alumnoAEliminar);
-                System.out.println("\nUsuarios.Alumno eliminado exitosamente.");
-            } else {
-                System.out.println("\nNo se encontró ningún alumno con el número de control ingresado.");
-            }
-        } catch (Exception e) {
-            System.out.println("\nOcurrió un error al eliminar al alumno. Por favor, intente de nuevo.");
-        }
-    }
-
-    public void mostrarCalificaciones() {
-        System.out.println("Calificaciones de " + this.getNombre() + " " + this.getApellido() + ":");
-        for (Map.Entry<String, Materia> entry : materiasConCalificaciones.entrySet()) {
-            String materiaNombre = entry.getKey();
-            Materia materia = entry.getValue();
-            double calificacion = materia.getCalificacion();
-            if (calificacion != -1) {
-                System.out.println(materiaNombre + ": " + calificacion);
-            } else {
-                System.out.println(materiaNombre + ": Sin calificar");
-            }
-        }
-    }
-
-    public void setGrupo(char grupo) {
-        this.grupo = grupo;
-    }
-
     public static void registrarAlumno() {
         // Aquí puse un try
         try {
@@ -202,5 +106,103 @@ public class Alumno extends Usuario {
         } catch (Exception e) {
             System.out.println("\nOcurrió un error al registrar al alumno. Por favor, intente de nuevo.");
         }
+    }
+
+    public static void modificarAlumno() {
+        boolean band = false;
+        // Aquí puse un try
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("\n---- Modificar alumno ----");
+            System.out.print("Ingrese el número de control del alumno que desea modificar: ");
+            String numero = scanner.nextLine();
+            for (Usuario usuario : Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO)) {
+                if (numero.equals(usuario.getNumeroControl())) {
+                    band = true;
+                    System.out.print("\nNombre: ");
+                    String nombre = scanner.nextLine();
+                    usuario.setNombre(nombre);
+                    System.out.print("Apellido paterno: ");
+                    String apellidoP = scanner.nextLine();
+                    System.out.print("Apellido materno: ");
+                    String apellidoM = scanner.nextLine();
+                    usuario.setApellido(apellidoP.concat(" ").concat(apellidoM));
+                    String fechaNacimiento = validarFecha(); // Método para validar fecha
+                    usuario.setFechaNacimiento(fechaNacimiento);
+                    System.out.print("Género (H/M): ");
+                    String genero = scanner.nextLine().toUpperCase();
+                    System.out.print("Estado: ");
+                    String estado = validarEstado(scanner.nextLine());
+                    usuario.setEstado(estado);
+                    System.out.print("Ciudad: ");
+                    String ciudad = scanner.nextLine();
+                    usuario.setCiudad(ciudad);
+                    System.out.print("Dirección: ");
+                    String direccion = scanner.nextLine();
+                    usuario.setDireccion(direccion);
+                    String nombreUsuario = registrarNombreUsuario();
+                    usuario.setNombreUsuario(nombreUsuario);
+                    String numeroControl = generarNumeroControl(nombre.charAt(0), Rol.ALUMNO);
+                    usuario.setNumeroControl(numeroControl);
+                    System.out.print("Contraseña: ");
+                    String contrasena = scanner.nextLine();
+                    usuario.setContrasena(contrasena);
+                    String curp = generarCurp(nombre, apellidoP, apellidoM, fechaNacimiento, genero, estado);
+                    usuario.setCurp(curp);
+                }
+            }
+            if (!band) {
+                System.out.println("\nEste número de control no pertenece a ningún alumno");
+            }
+        } catch (Exception e) {
+            System.out.println("\nOcurrió un error al modificar al alumno. Por favor, intente de nuevo.");
+        }
+    }
+
+    public static void eliminarAlumno() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("\n---- Eliminar alumno ----");
+            System.out.print("Ingrese el número de control del alumno que desea eliminar: ");
+            String numero = scanner.nextLine();
+
+            Alumno alumnoAEliminar = null;
+            for (Usuario usuario : Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO)) {
+                if (numero.equals(usuario.getNumeroControl())) {
+                    alumnoAEliminar = (Alumno) usuario;
+                    break;
+                }
+            }
+            if (alumnoAEliminar != null) {
+                Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO).remove(alumnoAEliminar);
+                System.out.println("\nAlumno eliminado exitosamente.");
+            } else {
+                System.out.println("\nNo se encontró ningún alumno con el número de control ingresado.");
+            }
+        } catch (Exception e) {
+            System.out.println("\nOcurrió un error al eliminar al alumno. Por favor, intente de nuevo.");
+        }
+    }
+
+    public void mostrarCalificaciones() {
+        System.out.println("Calificaciones de " + this.getNombre() + " " + this.getApellido() + ":");
+        for (Map.Entry<String, Materia> entry : materiasConCalificaciones.entrySet()) {
+            String materiaNombre = entry.getKey();
+            Materia materia = entry.getValue();
+            double calificacion = materia.getCalificacion();
+            if (calificacion != -1) {
+                System.out.println(materiaNombre + ": " + calificacion);
+            } else {
+                System.out.println(materiaNombre + ": Sin calificar");
+            }
+        }
+    }
+
+    public double getPromedio() {
+        return promedio;
+    }
+
+    public void setGrupo(char grupo) {
+        this.grupo = grupo;
     }
 }

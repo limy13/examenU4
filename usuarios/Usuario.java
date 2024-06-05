@@ -1,6 +1,4 @@
 package usuarios;
-
-
 import java.time.LocalDate;
 import java.util.*;
 
@@ -100,7 +98,7 @@ public class Usuario {
     public static ArrayList<String> datosComun(Rol rol) {
         ArrayList<String> datosComun = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        String rolUsuario = rol == Rol.ALUMNO ? "Usuarios.Alumno" : rol == Rol.PROFESOR ? "Usuarios.Profesor" : "Usuarios.Coordinador";
+        String rolUsuario = rol == Rol.ALUMNO ? "Alumno" : rol == Rol.PROFESOR ? "Profesor" : "Coordinador";
 
         System.out.println(String.format("\n\n---- Bienvenido al registro del %s", rolUsuario + " ----"));
         System.out.println("\nIngresa los siguientes datos para continuar con el registro: ");
@@ -189,6 +187,20 @@ public class Usuario {
         return "X";
     }
 
+    static char validarGrupo(){
+        Scanner scanner = new Scanner(System.in);
+        char grupoIngresado;
+        while (true){
+            grupoIngresado = scanner.nextLine().toUpperCase().charAt(0);
+            if(grupoIngresado == 'A' || grupoIngresado == 'B'){
+                break;
+            }else{
+                System.out.println("--- Ese grupo no existe intentalo de nuevo ---");
+            }
+        }
+        return grupoIngresado;
+    }
+
     public static String validarFecha() {
         Scanner scanner = new Scanner(System.in);
         boolean fechaValida = false;
@@ -262,7 +274,7 @@ public class Usuario {
         System.out.println("Dirección: " + this.direccion);
         System.out.println("Fecha de registro: " + this.fechaRegistro);
         System.out.println("Número de control: " + this.numeroControl);
-        System.out.println("carreras.Carrera: " + this.carrera);
+        System.out.println("Carrera: " + this.carrera);
     }
 
     private static final List<String> ESTADOS_MEXICO = Arrays.asList(
@@ -347,19 +359,5 @@ public class Usuario {
         curp += homoclave;
 
         return curp;
-    }
-
-    static char validarGrupo(){
-        Scanner scanner = new Scanner(System.in);
-        char grupoIngresado;
-        while (true){
-            grupoIngresado = scanner.nextLine().toUpperCase().charAt(0);
-            if(grupoIngresado == 'A' || grupoIngresado == 'B'){
-                break;
-            }else{
-                System.out.println("--- Ese grupo no existe intentalo de nuevo ---");
-            }
-        }
-        return grupoIngresado;
     }
 }

@@ -4,6 +4,7 @@ import carreras.utils.*;
 import semestres.Materia;
 import usuarios.Alumno;
 import usuarios.Coordinador;
+import usuarios.Profesor;
 import usuarios.Usuario;
 import usuarios.utils.Rol;
 
@@ -12,8 +13,8 @@ public class Sistema {
     public static final Map<Carreras, Map<Rol, ArrayList<Usuario>>> usuarios = new HashMap<>();
     public static Carreras carrera; // Accede a la carrera de la persona que inicia sesion
     public static final Map<Carreras, Map<Integer, String[]>> materiasPorCarreraYSemestre = new HashMap<>();
+    private Map<Profesor, String> profesorPorMateria;
     private static ArrayList<Usuario> graduados = new ArrayList<>();
-    private Map<String, String> profesorPorMateria;
     ///////////////////////////////////AQUI MODIFIQUE Y AGREGUE EL STATIC///////////////
     static {
         for (Carreras carrera : Carreras.values()) {
@@ -118,11 +119,11 @@ public class Sistema {
     }
 
 //    public static void guardarEnJSON() {
-//        Usuarios.Serializer.UsuarioSerializer.serialize();
+//        UsuarioSerializer.serialize();
 //    }
 //
 //    public static void leerJSON() {
-//        Usuarios.Serializer.UsuarioDeserializer.deserialize();
+//        UsuarioDeserializer.deserialize();
 //    }
 
     static void subirDeSemestre(){
@@ -132,12 +133,14 @@ public class Sistema {
                 Iterator<Usuario> iterator = alumnosList.iterator();
                 while (iterator.hasNext()) {
                     Usuario alumno = iterator.next();
-                    int semestre = ((Alumno)alumno).getSemestre();
-                    if (semestre == 3) {
-                        graduados.add(alumno);
-                        iterator.remove();
-                    } else {
-                        ((Alumno)alumno).setSemestre(semestre + 1);
+                    if (((Alumno)alumno).getPromedio() >= 70){
+                        int semestre = ((Alumno)alumno).getSemestre();
+                        if (semestre == 3) {
+                            graduados.add(alumno);
+                            iterator.remove();
+                        } else {
+                            ((Alumno)alumno).setSemestre(semestre + 1);
+                        }
                     }
                 }
             }
@@ -151,11 +154,12 @@ public class Sistema {
         }
     }
 
-    public void asignarMaestroAMateria(String profesor, String materia) {
+    public void asignarMaestroAMateria(Profesor profesor, String materia) {
         profesorPorMateria.put(profesor, materia);
     }
 
-    public String obtenerMateriaPorProfesor(String profesor) {
+    public String obtenerMateriaPorProfesor(Profesor profesor) {
         return profesorPorMateria.get(profesor);
     }
+
 }
