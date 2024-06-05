@@ -33,7 +33,13 @@ public class Sistema {
         materiasPorCarreraYSemestre.get(Carreras.ELC).put(3, new String[]{"Redes 3", "Circuitos 3", "Cálculo 3"});
     }
 
-    public Sistema() {
+    public Sistema(boolean band) {
+        if(band) {
+            inicializarDatos();
+        }
+    }
+
+    public void inicializarDatos() {
         // Creación de coordinadores
         Coordinador coordinadorIsc = new Coordinador("Jose", "Herrera Garcia", "Morelia", "MN", Usuario.generarCurp("Jose", "Herrera", "García", "1998-01-01", "H", "MN").toUpperCase(), "JULI", "CJ24ISC-0", "1998-01-01", Carreras.ISC, 20000, new String[]{"Programación 1", "Cálculo 1", "Probabilidad 1"}, "1", "1");
         Coordinador coordinadorImat = new Coordinador("Maria", "López Martínez", "Morelia", "MN", Usuario.generarCurp("Maria", "Lopez", "Martinez", "1982-03-24", "M", "MN").toUpperCase(), "JAZMIN", "CM24IMAT-0", "1982-03-24", Carreras.IMAT, 30000, new String[]{"Estadística 1", "Contabilidad 1", "Cálculo 1"}, "2", "2");

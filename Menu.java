@@ -7,7 +7,11 @@ public class Menu {
     private Scanner scanner = new Scanner(System.in);
     private String decision; //sirve para tomar una decision en cualquier menú
     //para elegir una opcion en el menu usen Strings porque es mas dificl que truene porfa :)
-    private Sistema sistema = new Sistema();
+    private Sistema sistema;
+
+    public Menu(boolean band) {
+        sistema = new Sistema(band);
+    }
 
     public void iniciarSesion() {
         boolean datosCorrectos = true, salir = false;
@@ -55,21 +59,21 @@ public class Menu {
     private void seleccionarMenu() {
         Usuario usuario = UsuarioEnSesion.obtenerInstancia().getUsuarioActual();
         switch (usuario.getRol()) {
-            case COORDINADOR: menuCoordinador(usuario.getNombreUsuario()); //le manda por parametro ek nombre de usuario para que muestre quien esta en sesion
+            case COORDINADOR: menuCoordinador(usuario); //le manda por parametro ek nombre de usuario para que muestre quien esta en sesion
                 break;
-            case ALUMNO: menuAlumno(usuario.getNombreUsuario());
+            case ALUMNO: menuAlumno(usuario);
                 break;
-            case PROFESOR: menuProfesor(usuario.getNombreUsuario());
+            case PROFESOR: menuProfesor(usuario);
                 break;
         }
     }
 
 
-    public void menuCoordinador(String nombreUsuario) {
+    public void menuCoordinador(Usuario usuario) {
         do {
             System.out.println("\n**");
             System.out.println("\n---- BIENVENIDO COORDINADOR ----\n");
-            System.out.println("Usuario: " + nombreUsuario);
+            System.out.println("Usuario: " + usuario.getNombreUsuario());
             System.out.println("\n1. Mostrar registro de alumnos graduados");
             System.out.println("2. Alumnos");
             System.out.println("3. Calificaciones");
@@ -177,8 +181,7 @@ public class Menu {
                 case "5":
                     break;
                 case "6":
-                    Usuario usuarioActual = UsuarioEnSesion.obtenerInstancia().getUsuarioActual();
-                    ((Coordinador) usuarioActual).verInformacionCoordinador();
+                    ((Coordinador) usuario).verInformacionCoordinador();
                     break;
                 case "7":
                     System.out.println("Cerrando Sesion");
@@ -191,14 +194,11 @@ public class Menu {
     }
 
 
-    public void menuAlumno(String nombreUsuario) {
-
-        Usuario usuarioActual = UsuarioEnSesion.obtenerInstancia().getUsuarioActual();
-
+    public void menuAlumno(Usuario usuario) {
         do {
             System.out.println("\n**");
             System.out.println("\n---- BIENVENIDO ALUMNO ----\n");
-            System.out.println("Usuario: " + nombreUsuario);
+            System.out.println("Usuario: " + usuario.getNombreUsuario());
             System.out.println("\n1. Ver mis calificaciones");
             System.out.println("2. Ver mis cursos inscritos");
             System.out.println("3. Ver mi información personal");
@@ -208,13 +208,13 @@ public class Menu {
 
             switch (decision) {
                 case "1":
-                    ((Alumno) usuarioActual).mostrarCalificaciones();
+                    ((Alumno) usuario).mostrarCalificaciones();
                     break;
                 case "2":
                     //Ver Cursos Inscritos
                     break;
                 case "3":
-                    ((Alumno) usuarioActual).verInformacionPersonal();
+                    ((Alumno) usuario).verInformacionPersonal();
                     break;
                 case "4":
                     System.out.println("Cerrando Sesion");
@@ -226,11 +226,11 @@ public class Menu {
         } while (!decision.equals("4"));
     }
 
-    public void menuProfesor(String nombreUsuario) {
+    public void menuProfesor(Usuario usuario) {
         do {
             System.out.println("\n**");
             System.out.println("\n---- BIENVENIDO MAESTRO ----\n");
-            System.out.println("Usuario: " + nombreUsuario);
+            System.out.println("Usuario: " + usuario);
             System.out.println("\n1. Ver mis grupos");
             System.out.println("2. Ver mis materias asignadas");
             System.out.println("3. Calificaciones");
@@ -250,8 +250,7 @@ public class Menu {
                     menuCalificaciones();
                     break;
                 case "4":
-                    Usuario usuarioActual = UsuarioEnSesion.obtenerInstancia().getUsuarioActual();
-                    ((Profesor) usuarioActual).verInformacionProfesor();
+                    ((Profesor) usuario).verInformacionProfesor();
                     break;
                 case "5":
                     System.out.println("Cerrando Sesion");
@@ -275,7 +274,7 @@ public class Menu {
 
             switch (dc) {
                 case "1":
-                    asignarCalificaciones();
+                    //asignarCalificaciones();
                     break;
                 case "2":
                     //Consultar Calificaciones
