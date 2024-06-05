@@ -1,13 +1,11 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Sistema {
 
     public static final Map<Carreras, Map<Rol, ArrayList<Usuario>>> usuarios = new HashMap<>();
     public static Carreras carrera; // Accede a la carrera de la persona que inicia sesion
     public static final Map<Carreras, Map<Integer, String[]>> materiasPorCarreraYSemestre = new HashMap<>();
+    private static ArrayList<Usuario> graduados = new ArrayList<>();
     ///////////////////////////////////AQUI MODIFIQUE Y AGREGUE EL STATIC///////////////
     static {
         for (Carreras carrera : Carreras.values()) {
@@ -113,4 +111,29 @@ public class Sistema {
 //        UsuarioDeserializer.deserialize();
 //    }
 
+    static void subirDeSemestre(){
+        for (Map<Rol, ArrayList<Usuario>> lista : usuarios.values()) {
+            ArrayList<Usuario> alumnosList = lista.get(Rol.ALUMNO);
+            if(alumnosList != null) {
+                Iterator<Usuario> iterator = alumnosList.iterator();
+                while (iterator.hasNext()) {
+                    Usuario alumno = iterator.next();
+                    int semestre = ((Alumno)alumno).getSemestre();
+                    if (semestre == 3) {
+                        graduados.add(alumno);
+                        iterator.remove();
+                    } else {
+                        ((Alumno)alumno).setSemestre(semestre + 1);
+                    }
+                }
+            }
+        }
+    }
+
+    static public void imprimirGraduados() {
+        System.out.println("Lista de graduados:");
+        for (Usuario graduado : graduados) {
+            System.out.println("Nombre: " + graduado.getNombre() + graduado.getApellido());
+        }
+    }
 }

@@ -42,6 +42,10 @@ public class Alumno extends Usuario {
         return semestre;
     }
 
+    public void setSemestre(int numero) {
+        semestre = numero;
+    }
+
     public static List<Alumno> filtrarPorSemestre(List<Alumno> alumnos, int semestre) {
         List<Alumno> alumnosFiltrados = new ArrayList<>();
         for (Alumno alumno : alumnos) {
