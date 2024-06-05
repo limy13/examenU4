@@ -40,7 +40,8 @@ public class Grupo {
         boolean reprobado = false;
         if (alumno.equals(alumno)){
             reprobado = false;
-        }else{
+        }
+        else{
             reprobado = true;
         }
         return reprobado;

@@ -187,6 +187,7 @@ public class Menu {
                     } while (!decisionProfesor.equals("5"));
                     break;
                 case "5":
+                    Sistema.subirDeSemestre();
                     break;
                 case "6":
                     ((Coordinador) usuario).verInformacionCoordinador();
@@ -206,7 +207,7 @@ public class Menu {
         do {
             System.out.println("\n**");
             System.out.println("\n---- BIENVENIDO ALUMNO ----\n");
-            System.out.println("Usuarios.Usuario: " + usuario.getNombreUsuario());
+            System.out.println("Usuario: " + usuario.getNombreUsuario());
             System.out.println("\n1. Ver mis calificaciones");
             System.out.println("2. Ver mis cursos inscritos");
             System.out.println("3. Ver mi información personal");
@@ -238,7 +239,7 @@ public class Menu {
         do {
             System.out.println("\n**");
             System.out.println("\n---- BIENVENIDO MAESTRO ----\n");
-            System.out.println("Usuarios.Usuario: " + usuario.getNombreUsuario());
+            System.out.println("Usuarios: " + usuario.getNombreUsuario());
             System.out.println("\n1. Ver mis grupos");
             System.out.println("2. Ver mis materias asignadas");
             System.out.println("3. Calificaciones");

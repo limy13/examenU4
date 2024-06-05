@@ -109,8 +109,16 @@ public class Usuario {
         System.out.print("Apellido materno: ");
         String apellidoM = scanner.nextLine();
         String fechaNacimiento = validarFecha();
-        System.out.print("Género (H/M): ");
-        String genero = scanner.nextLine().toUpperCase();
+        String genero;
+        while (true) {
+            System.out.print("Género (H/M): ");
+            genero = scanner.nextLine().toUpperCase();
+            if (genero.equals("H") || genero.equals("M")) {
+                break;
+            } else {
+                System.out.println("Género no válido. Por favor, ingrese 'H' para Hombre o 'M' para Mujer.");
+            }
+        }
         System.out.print("Estado: ");
         String estado = validarEstado(scanner.nextLine());
         System.out.print("Ciudad: ");
@@ -128,6 +136,8 @@ public class Usuario {
         datosComun.addAll(Arrays.asList(nombre, apellidoP.concat(" ").concat(apellidoM), fechaNacimiento, estado, ciudad, direccion, curp.toUpperCase(), nombreUsuario, contrasena, numeroControl));
         return datosComun;
     }
+
+
 
     public static String registrarNombreUsuario() {
         Scanner scanner = new Scanner(System.in);
@@ -265,7 +275,7 @@ public class Usuario {
     }
 
     public void verInformacionPersonal() {
-        System.out.println("---- Información Personal ----");
+        System.out.println("\n---- Información Personal ----\n");
         System.out.println("Nombre completo: " + this.nombre + " " + this.apellido);
         System.out.println("Fecha de nacimiento: " + this.fechaNacimiento);
         System.out.println("Ciudad: " + this.ciudad);

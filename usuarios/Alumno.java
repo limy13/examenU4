@@ -2,6 +2,7 @@ package usuarios;
 import java.util.*;
 import carreras.utils.Carreras;
 import semestres.Materia;
+import semestres.Semestre;
 import sistema.Sistema;
 import usuarios.utils.Rol;
 
@@ -88,10 +89,18 @@ public class Alumno extends Usuario {
             String nombreUsuario = datosComun.get(7);
             String contrasena = datosComun.get(8);
             String numeroControl = datosComun.get(9);
-            System.out.println("Inserte el grupo del Alumno (A/B)");
-            char grupo = scanner.nextLine().charAt(0);
+            char grupo;
+            while (true) {
+                System.out.println("Inserte el grupo del Alumno (A/B)");
+                grupo = scanner.nextLine().toUpperCase().charAt(0);
+                if (grupo == 'A' || grupo == 'B') {
+                    break;
+                } else {
+                    System.out.println("Grupo inválido. Por favor, ingrese 'A' o 'B'.");
+                }
+            }
 
-            Alumno alumno = new Alumno(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, grupo,1, nombreUsuario, contrasena);
+            Alumno alumno = new Alumno(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, grupo, 1, nombreUsuario, contrasena);
 
             // Asegúrate de que la lista de alumnos para la carrera actual no sea null
             if (!Sistema.usuarios.containsKey(Sistema.carrera)) {
@@ -105,11 +114,12 @@ public class Alumno extends Usuario {
             alumno.asignarMaterias(Sistema.carrera, 1);
             Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO).add(alumno);
 
-            Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO).add(alumno);
+            System.out.println("Alumno registrado exitosamente.");
         } catch (Exception e) {
             System.out.println("\nOcurrió un error al registrar al alumno. Por favor, intente de nuevo.");
         }
     }
+
 
 
     public static void modificarAlumno() {
