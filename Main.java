@@ -7,7 +7,7 @@ public class Main {
         //COORDINADOR IMAT: Usuarios.Usuario: 2, Contraseña: 2
         //COORDINADOR ELC: Usuarios.Usuario: 3, Contraseña: 3
         Sistema.leerJSON();
-        Menu menu = new Menu(false);
+        Menu menu = new Menu(true);
         menu.iniciarSesion();
         Sistema.guardarEnJSON();
     }
