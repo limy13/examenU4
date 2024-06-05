@@ -1,5 +1,3 @@
-
-
 import java.util.*;
 
 public class Sistema {
@@ -8,6 +6,7 @@ public class Sistema {
     public static Carreras carrera; // Accede a la carrera de la persona que inicia sesion
     public static final Map<Carreras, Map<Integer, String[]>> materiasPorCarreraYSemestre = new HashMap<>();
     private static ArrayList<Usuario> graduados = new ArrayList<>();
+    private Map<String, String> profesorPorMateria;
     ///////////////////////////////////AQUI MODIFIQUE Y AGREGUE EL STATIC///////////////
     static {
         for (Carreras carrera : Carreras.values()) {
@@ -143,5 +142,13 @@ public class Sistema {
         for (Usuario graduado : graduados) {
             System.out.println("Nombre: " + graduado.getNombre() + graduado.getApellido());
         }
+    }
+
+    public void asignarMaestroAMateria(String profesor, String materia) {
+        profesorPorMateria.put(profesor, materia);
+    }
+
+    public String obtenerMateriaPorProfesor(String profesor) {
+        return profesorPorMateria.get(profesor);
     }
 }
