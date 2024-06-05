@@ -1,3 +1,4 @@
+
 import java.util.*;
 
 public class Alumno extends Usuario {
@@ -68,41 +69,6 @@ public class Alumno extends Usuario {
         System.out.println("Promedio: " + this.promedio);
     }
 
-    public static void registrarAlumno() {
-        // Aquí puse un try
-        try {
-            Scanner scanner = new Scanner(System.in);
-            ArrayList<String> datosComun = Usuario.datosComun(Rol.ALUMNO);
-            String nombre = datosComun.get(0);
-            String apellidos = datosComun.get(1);
-            String fechaNacimiento = datosComun.get(2);
-            String estado = datosComun.get(3);
-            String ciudad = datosComun.get(4);
-            String direccion = datosComun.get(5);
-            String curp = datosComun.get(6);
-            String nombreUsuario = datosComun.get(7);
-            String contrasena = datosComun.get(8);
-            String numeroControl = datosComun.get(9);
-            System.out.println("Inserte el grupo del Alumno (A/B)");
-            char grupo = scanner.nextLine().charAt(0);
-
-            Alumno alumno = new Alumno(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, grupo,1, nombreUsuario, contrasena);
-
-            // Asegúrate de que la lista de alumnos para la carrera actual no sea null
-            if (!Sistema.usuarios.containsKey(Sistema.carrera)) {
-                Sistema.usuarios.put(Sistema.carrera, new HashMap<>());
-            }
-            if (!Sistema.usuarios.get(Sistema.carrera).containsKey(Rol.ALUMNO)) {
-                Sistema.usuarios.get(Sistema.carrera).put(Rol.ALUMNO, new ArrayList<>());
-            }
-
-            // Agrega el alumno a la lista correspondiente
-            Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO).add(alumno);
-        } catch (Exception e) {
-            System.out.println("\nOcurrió un error al registrar al alumno. Por favor, intente de nuevo.");
-        }
-    }
-
     public static void modificarAlumno() {
         boolean band = false;
         // Aquí puse un try
@@ -122,12 +88,12 @@ public class Alumno extends Usuario {
                     System.out.print("Apellido materno: ");
                     String apellidoM = scanner.nextLine();
                     usuario.setApellido(apellidoP.concat(" ").concat(apellidoM));
-                    String fechaNacimiento = validarFecha(); // Método para validar fecha
+                    String fechaNacimiento = Usuario.validarFecha(); // Método para validar fecha
                     usuario.setFechaNacimiento(fechaNacimiento);
                     System.out.print("Género (H/M): ");
                     String genero = scanner.nextLine().toUpperCase();
                     System.out.print("Estado: ");
-                    String estado = validarEstado(scanner.nextLine());
+                    String estado = Usuario.validarEstado(scanner.nextLine());
                     usuario.setEstado(estado);
                     System.out.print("Ciudad: ");
                     String ciudad = scanner.nextLine();
@@ -135,14 +101,14 @@ public class Alumno extends Usuario {
                     System.out.print("Dirección: ");
                     String direccion = scanner.nextLine();
                     usuario.setDireccion(direccion);
-                    String nombreUsuario = registrarNombreUsuario();
+                    String nombreUsuario = Usuario.registrarNombreUsuario();
                     usuario.setNombreUsuario(nombreUsuario);
-                    String numeroControl = generarNumeroControl(nombre.charAt(0), Rol.ALUMNO);
+                    String numeroControl = Usuario.generarNumeroControl(nombre.charAt(0), Rol.ALUMNO);
                     usuario.setNumeroControl(numeroControl);
                     System.out.print("Contraseña: ");
                     String contrasena = scanner.nextLine();
                     usuario.setContrasena(contrasena);
-                    String curp = generarCurp(nombre, apellidoP, apellidoM, fechaNacimiento, genero, estado);
+                    String curp = Usuario.generarCurp(nombre, apellidoP, apellidoM, fechaNacimiento, genero, estado);
                     usuario.setCurp(curp);
                 }
             }
@@ -171,7 +137,7 @@ public class Alumno extends Usuario {
 
             if (alumnoAEliminar != null) {
                 Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO).remove(alumnoAEliminar);
-                System.out.println("\nAlumno eliminado exitosamente.");
+                System.out.println("\nUsuarios.Alumno eliminado exitosamente.");
             } else {
                 System.out.println("\nNo se encontró ningún alumno con el número de control ingresado.");
             }
@@ -196,5 +162,40 @@ public class Alumno extends Usuario {
 
     public void setGrupo(char grupo) {
         this.grupo = grupo;
+    }
+
+    public static void registrarAlumno() {
+        // Aquí puse un try
+        try {
+            Scanner scanner = new Scanner(System.in);
+            ArrayList<String> datosComun = Usuario.datosComun(Rol.ALUMNO);
+            String nombre = datosComun.get(0);
+            String apellidos = datosComun.get(1);
+            String fechaNacimiento = datosComun.get(2);
+            String estado = datosComun.get(3);
+            String ciudad = datosComun.get(4);
+            String direccion = datosComun.get(5);
+            String curp = datosComun.get(6);
+            String nombreUsuario = datosComun.get(7);
+            String contrasena = datosComun.get(8);
+            String numeroControl = datosComun.get(9);
+            System.out.println("Inserte el grupo del Alumno (A/B)");
+            char grupo = Usuario.validarGrupo();
+
+            Alumno alumno = new Alumno(nombre, apellidos, ciudad, estado, curp.toUpperCase(), direccion, numeroControl, fechaNacimiento, Sistema.carrera, grupo,1, nombreUsuario, contrasena);
+
+            // Asegúrate de que la lista de alumnos para la carrera actual no sea null
+            if (!Sistema.usuarios.containsKey(Sistema.carrera)) {
+                Sistema.usuarios.put(Sistema.carrera, new HashMap<>());
+            }
+            if (!Sistema.usuarios.get(Sistema.carrera).containsKey(Rol.ALUMNO)) {
+                Sistema.usuarios.get(Sistema.carrera).put(Rol.ALUMNO, new ArrayList<>());
+            }
+
+            // Agrega el alumno a la lista correspondiente
+            Sistema.usuarios.get(Sistema.carrera).get(Rol.ALUMNO).add(alumno);
+        } catch (Exception e) {
+            System.out.println("\nOcurrió un error al registrar al alumno. Por favor, intente de nuevo.");
+        }
     }
 }

@@ -15,12 +15,12 @@ public class Grupo {
             for (int i = 0; i < 3; i++){
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("\nRegistro de alumno " + (i+1));
-                Alumno.registrarAlumno(); // Llama al método estático registrarAlumno de la clase Alumno
+                Alumno.registrarAlumno(); // Llama al método estático registrarAlumno de la clase Usuarios.Alumno
             }
         }else if (alumnos.size() < 20){
             Scanner scanner = new Scanner(System.in);
             System.out.println("\nRegistro de nuevo alumno");
-            Alumno.registrarAlumno(); // Llama al método estático registrarAlumno de la clase Alumno
+            Alumno.registrarAlumno(); // Llama al método estático registrarAlumno de la clase Usuarios.Alumno
         }
     }
 

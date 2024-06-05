@@ -37,7 +37,7 @@ public class Profesor extends Usuario {
         // Aquí puse un try
         try {
             Scanner scanner = new Scanner(System.in);
-            ArrayList<String> datosComun = datosComun(Rol.PROFESOR);
+            ArrayList<String> datosComun = Usuario.datosComun(Rol.PROFESOR);
             String nombre = datosComun.get(0);
             String apellidos = datosComun.get(1);
             String fechaNacimiento = datosComun.get(2);
@@ -124,12 +124,12 @@ public class Profesor extends Usuario {
                     System.out.print("Apellido materno: ");
                     String apellidoM = scanner.nextLine();
                     profesor.setApellido(apellidoP.concat(" ").concat(apellidoM));
-                    String fechaNacimiento = validarFecha(); // Método para validar fecha
+                    String fechaNacimiento = Usuario.validarFecha(); // Método para validar fecha
                     profesor.setFechaNacimiento(fechaNacimiento);
                     System.out.print("Género (H/M): ");
                     String genero = scanner.nextLine().toUpperCase();
                     System.out.print("Estado: ");
-                    String estado = validarEstado(scanner.nextLine());
+                    String estado = Usuario.validarEstado(scanner.nextLine());
                     profesor.setEstado(estado);
                     System.out.print("Ciudad: ");
                     String ciudad = scanner.nextLine();
@@ -137,14 +137,14 @@ public class Profesor extends Usuario {
                     System.out.print("Dirección: ");
                     String direccion = scanner.nextLine();
                     profesor.setDireccion(direccion);
-                    String nombreUsuario = registrarNombreUsuario();
+                    String nombreUsuario = Usuario.registrarNombreUsuario();
                     profesor.setNombreUsuario(nombreUsuario);
-                    String numeroControl = generarNumeroControl(nombre.charAt(0), Rol.ALUMNO);
+                    String numeroControl = Usuario.generarNumeroControl(nombre.charAt(0), Rol.ALUMNO);
                     profesor.setNumeroControl(numeroControl);
                     System.out.print("Contraseña: ");
                     String contrasena = scanner.nextLine();
                     profesor.setContrasena(contrasena);
-                    String curp = generarCurp(nombre, apellidoP, apellidoM, fechaNacimiento, genero, estado);
+                    String curp = Usuario.generarCurp(nombre, apellidoP, apellidoM, fechaNacimiento, genero, estado);
                     profesor.setCurp(curp);
                     System.out.println("Sueldo: ");
                     double sueldo = scanner.nextDouble();
@@ -178,7 +178,7 @@ public class Profesor extends Usuario {
     public static void eliminarProfesor() {
         try {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("\n---- Eliminar Profesor ----\n");
+            System.out.println("\n---- Eliminar Usuarios.Profesor ----\n");
             System.out.print("Ingrese el número de control del profesor que desea eliminar: ");
             String numero = scanner.nextLine();
 
@@ -192,7 +192,7 @@ public class Profesor extends Usuario {
 
             if (profesorAEliminar != null) {
                 Sistema.usuarios.get(Sistema.carrera).get(Rol.PROFESOR).remove(profesorAEliminar);
-                System.out.println("\nAlumno eliminado exitosamente.");
+                System.out.println("\nUsuarios.Alumno eliminado exitosamente.");
             } else {
                 System.out.println("\nNo se encontró ningún alumno con el número de control ingresado");
             }
