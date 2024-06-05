@@ -238,7 +238,7 @@ public class Menu {
         do {
             System.out.println("\n**");
             System.out.println("\n---- BIENVENIDO MAESTRO ----\n");
-            System.out.println("Usuarios.Usuario: " + usuario);
+            System.out.println("Usuarios.Usuario: " + usuario.getNombreUsuario());
             System.out.println("\n1. Ver mis grupos");
             System.out.println("2. Ver mis materias asignadas");
             System.out.println("3. Calificaciones");

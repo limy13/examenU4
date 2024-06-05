@@ -6,6 +6,8 @@ import usuarios.Alumno;
 import usuarios.Coordinador;
 import usuarios.Profesor;
 import usuarios.Usuario;
+import usuarios.serializer.UsuarioDeserializer;
+import usuarios.serializer.UsuarioSerializer;
 import usuarios.utils.Rol;
 
 public class Sistema {
@@ -118,13 +120,13 @@ public class Sistema {
         System.out.println("\nTotal de calificaciones asignadas: " + calificacionesAsignadas);
     }
 
-//    public static void guardarEnJSON() {
-//        UsuarioSerializer.serialize();
-//    }
-//
-//    public static void leerJSON() {
-//        UsuarioDeserializer.deserialize();
-//    }
+    public static void guardarEnJSON() {
+        UsuarioSerializer.serialize();
+    }
+
+    public static void leerJSON() {
+        UsuarioDeserializer.deserialize();
+    }
 
     static void subirDeSemestre(){
         for (Map<Rol, ArrayList<Usuario>> lista : usuarios.values()) {

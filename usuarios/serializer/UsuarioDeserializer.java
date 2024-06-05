@@ -1,77 +1,92 @@
 package usuarios.serializer;
+import carreras.utils.Carreras;
+import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
+import sistema.Sistema;
+import usuarios.Usuario;
+import usuarios.models.UsuarioModel;
+import usuarios.utils.Rol;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+public abstract class UsuarioDeserializer {
 
-public class UsuarioDeserializer {
+    public static void deserialize() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("usuarios.json"));
+            Gson gson = new Gson();
+            UsuarioModel usuarioModel = gson.fromJson(reader, UsuarioModel.class);
+            HashMap<Rol, ArrayList<Usuario>> ISC;
+            HashMap<Rol, ArrayList<Usuario>> ELC;
+            HashMap<Rol, ArrayList<Usuario>> IMAT;
+            ArrayList<Usuario> alumnos;
+            ArrayList<Usuario> profesores;
+            ArrayList<Usuario> coordinadores;
 
-//    public static void deserialize() {
-//        try {
-//            BufferedReader reader = new BufferedReader(new FileReader("usuarios.json"));
-//            Gson gson = new Gson();
-//            Usuarios.models.UsuarioModel usuarioModel = gson.fromJson(reader, Usuarios.models.UsuarioModel.class);
-//            HashMap<Usuarios.utils.Rol, ArrayList<Usuarios.Usuario>> ISC;
-//            HashMap<Usuarios.utils.Rol, ArrayList<Usuarios.Usuario>> ELC;
-//            HashMap<Usuarios.utils.Rol, ArrayList<Usuarios.Usuario>> IMAT;
-//            ArrayList<Usuarios.Usuario> alumnos;
-//            ArrayList<Usuarios.Usuario> profesores;
-//            ArrayList<Usuarios.Usuario> coordinadores;
-//
-//            if(usuarioModel == null) {
-//                System.out.println("El archivo JSON no pudo ser deserializado a Usuarios.models.UsuarioModel");
-//                return;
-//            }
-//
-//            if(usuarioModel.getISC() != null) {
-//                alumnos = new ArrayList<>(usuarioModel.getISC().get(Usuarios.utils.Rol.ALUMNO));
-//                profesores = new ArrayList<>(usuarioModel.getISC().get(Usuarios.utils.Rol.PROFESOR));
-//                coordinadores = new ArrayList<>(usuarioModel.getISC().get(Usuarios.utils.Rol.COORDINADOR));
-//
-//                sistema.Sistema.usuarios.put(Carreras.ISC, new HashMap<>());
-//                sistema.Sistema.usuarios.get(Carreras.ISC).put(Usuarios.utils.Rol.ALUMNO, alumnos);
-//                sistema.Sistema.usuarios.get(Carreras.ISC).put(Usuarios.utils.Rol.PROFESOR, profesores);
-//                sistema.Sistema.usuarios.get(Carreras.ISC).put(Usuarios.utils.Rol.COORDINADOR, coordinadores);
-//            }
-//            else {
-//                sistema.Sistema.usuarios.put(Carreras.ISC, new HashMap<>());
-//            }
-//
-//            if(usuarioModel.getELC() != null) {
-//                alumnos = new ArrayList<>(usuarioModel.getELC().get(Usuarios.utils.Rol.ALUMNO));
-//                profesores = new ArrayList<>(usuarioModel.getELC().get(Usuarios.utils.Rol.PROFESOR));
-//                coordinadores = new ArrayList<>(usuarioModel.getELC().get(Usuarios.utils.Rol.COORDINADOR));
-//
-//                sistema.Sistema.usuarios.put(Carreras.ELC, new HashMap<>());
-//                sistema.Sistema.usuarios.get(Carreras.ELC).put(Usuarios.utils.Rol.ALUMNO, alumnos);
-//                sistema.Sistema.usuarios.get(Carreras.ELC).put(Usuarios.utils.Rol.PROFESOR, profesores);
-//                sistema.Sistema.usuarios.get(Carreras.ELC).put(Usuarios.utils.Rol.COORDINADOR, coordinadores);
-//            }
-//            else {
-//                sistema.Sistema.usuarios.put(Carreras.ELC, new HashMap<>());
-//            }
-//
-//            if(usuarioModel.getIMAT() != null) {
-//                alumnos = new ArrayList<>(usuarioModel.getIMAT().get(Usuarios.utils.Rol.ALUMNO));
-//                profesores = new ArrayList<>(usuarioModel.getIMAT().get(Usuarios.utils.Rol.PROFESOR));
-//                coordinadores = new ArrayList<>(usuarioModel.getIMAT().get(Usuarios.utils.Rol.COORDINADOR));
-//
-//                sistema.Sistema.usuarios.put(Carreras.IMAT, new HashMap<>());
-//                sistema.Sistema.usuarios.get(Carreras.IMAT).put(Usuarios.utils.Rol.ALUMNO, alumnos);
-//                sistema.Sistema.usuarios.get(Carreras.IMAT).put(Usuarios.utils.Rol.PROFESOR, profesores);
-//                sistema.Sistema.usuarios.get(Carreras.IMAT).put(Usuarios.utils.Rol.COORDINADOR, coordinadores);
-//            }
-//            else {
-//                sistema.Sistema.usuarios.put(Carreras.IMAT, new HashMap<>());
-//            }
-//
-//        } catch (FileNotFoundException e) {
-//            System.out.println(e);
-//        } catch (IOException e) {
-//            System.out.println(e);
-//        } catch (JsonSyntaxException e) {
-//            System.out.println(e);
-//        } catch (JsonParseException e) {
-//            System.out.println(e);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//    }
+            if(usuarioModel == null) {
+                System.out.println("El archivo JSON no pudo ser deserializado a UsuarioModel");
+                return;
+            }
+
+            if(usuarioModel.getISC() != null) {
+                alumnos = new ArrayList<>(usuarioModel.getISC().get(Rol.ALUMNO));
+                profesores = new ArrayList<>(usuarioModel.getISC().get(Rol.PROFESOR));
+                coordinadores = new ArrayList<>(usuarioModel.getISC().get(Rol.COORDINADOR));
+
+                Sistema.usuarios.put(Carreras.ISC, new HashMap<>());
+                Sistema.usuarios.get(Carreras.ISC).put(Rol.ALUMNO, alumnos);
+                Sistema.usuarios.get(Carreras.ISC).put(Rol.PROFESOR, profesores);
+                Sistema.usuarios.get(Carreras.ISC).put(Rol.COORDINADOR, coordinadores);
+            }
+            else {
+                Sistema.usuarios.put(Carreras.ISC, new HashMap<>());
+            }
+
+            if(usuarioModel.getELC() != null) {
+                alumnos = new ArrayList<>(usuarioModel.getELC().get(Rol.ALUMNO));
+                profesores = new ArrayList<>(usuarioModel.getELC().get(Rol.PROFESOR));
+                coordinadores = new ArrayList<>(usuarioModel.getELC().get(Rol.COORDINADOR));
+
+                Sistema.usuarios.put(Carreras.ELC, new HashMap<>());
+                Sistema.usuarios.get(Carreras.ELC).put(Rol.ALUMNO, alumnos);
+                Sistema.usuarios.get(Carreras.ELC).put(Rol.PROFESOR, profesores);
+                Sistema.usuarios.get(Carreras.ELC).put(Rol.COORDINADOR, coordinadores);
+            }
+            else {
+                Sistema.usuarios.put(Carreras.ELC, new HashMap<>());
+            }
+
+            if(usuarioModel.getIMAT() != null) {
+                alumnos = new ArrayList<>(usuarioModel.getIMAT().get(Rol.ALUMNO));
+                profesores = new ArrayList<>(usuarioModel.getIMAT().get(Rol.PROFESOR));
+                coordinadores = new ArrayList<>(usuarioModel.getIMAT().get(Rol.COORDINADOR));
+
+                Sistema.usuarios.put(Carreras.IMAT, new HashMap<>());
+                Sistema.usuarios.get(Carreras.IMAT).put(Rol.ALUMNO, alumnos);
+                Sistema.usuarios.get(Carreras.IMAT).put(Rol.PROFESOR, profesores);
+                Sistema.usuarios.get(Carreras.IMAT).put(Rol.COORDINADOR, coordinadores);
+            }
+            else {
+                Sistema.usuarios.put(Carreras.IMAT, new HashMap<>());
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        } catch (IOException e) {
+            System.out.println(e);
+        } catch (JsonSyntaxException e) {
+            System.out.println(e);
+        } catch (JsonParseException e) {
+            System.out.println(e);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
+
+
